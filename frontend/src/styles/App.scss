@@ -1,0 +1,10 @@
+@use "./base/typography";
+@use './abstracts/mixins';
+@use './layout/header';
+@use './layout/createPostSection';
+@use './layout/postCard';
+
+
+body {
+    @include mixins.base-styles;
+}

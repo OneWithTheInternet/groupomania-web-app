@@ -1,0 +1,12 @@
+.createPostSection {
+    background-color: beige;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 20px 0px;
+    width: 100%;
+
+    & a {
+        display: flex;
+        flex-flow: row wrap;
+    }
+}
