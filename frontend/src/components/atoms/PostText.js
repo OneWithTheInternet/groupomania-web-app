@@ -1,6 +1,8 @@
-function PostText() {
+function PostText(props) {
+    //Assinging variables to props' value
+    const { textProp } = props;
     return <div className="postText">
-        <b>placehoder text data that just keeps on going and going and going</b>
+        <b>{ textProp }</b>
     </div>
 }
 

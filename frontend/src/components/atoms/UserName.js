@@ -1,7 +1,8 @@
 function UserName(props) {
-    //importing prop from parent component
-    console.log(props)
+    //Assigning variables to the values of props
+   const { userNameProp } = props
     return <div className="userName">
+        {/* accessing username from prop and printing in tag bellow */}
         <b><strong>{props.userNameProp}</strong></b>
     </div>
 }
