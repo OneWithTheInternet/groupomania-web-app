@@ -3,7 +3,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 function DeleteIcon() {
     return <div className="deleteIconContainer">
-        <FontAwesomeIcon icon={faTrashCan} />
+        <FontAwesomeIcon className="icon2" icon={faTrashCan} />
     </div>
 }
 

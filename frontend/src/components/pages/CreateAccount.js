@@ -1,8 +1,16 @@
-import React from 'react'
+import React from 'react';
+import Header from '../organisms/Header';
+import CreateAccountForm from '../organisms/CreateAccountForm';
 
 function CreateAccount() {
   return (
-    <div className='mainDiv'>CreateAccount</div>
+    <div className='mainContainer'>
+      <Header />
+      <section className="createAccount">
+        <h1>Create Account</h1>
+        <CreateAccountForm />
+      </section>
+    </div>
   )
 }
 

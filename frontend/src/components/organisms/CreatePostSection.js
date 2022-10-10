@@ -7,7 +7,7 @@ function CreatePostSection() {
         <h1>Create a Post</h1>
         <div className="createPostSection">
             <UserImage />
-            <TextField />
+            <TextField value="Write your text here..." />
             <ImageIcon />
         </div>
     </section>

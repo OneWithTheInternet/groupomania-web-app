@@ -1,7 +1,7 @@
 @use '../abstracts/variables';
 
 .mainContainer .header {
-    background-color: variables.$bg3--dark;
+    background-color: variables.$bgColor--dark;
     padding: 3%;
     display: flex;
     flex-flow: row wrap;
@@ -21,7 +21,7 @@
     &__dropdown {
         //hidning element from view
         visibility: hidden;
-        background-color: variables.$bg1;
+        background-color: variables.$bgColor1;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         position: absolute;
         right: 0;

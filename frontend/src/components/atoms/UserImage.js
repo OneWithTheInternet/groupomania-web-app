@@ -3,7 +3,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 function UserIcon() {
     return <div className="userImageContainer">
-        <FontAwesomeIcon icon={faUser} />
+        <FontAwesomeIcon className="icon1" icon={faUser} />
     </div>
 }
 

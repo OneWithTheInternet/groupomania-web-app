@@ -9,7 +9,7 @@ function CreatePost() {
         <Header />
 
         <section className='createPost'>
-            <div className='createPost__title'><h1>CreatePost</h1></div>
+            <div className='createPost__title'><h1>Create a Post</h1></div>
             <form className='createPost__form'>
 
                 <label>

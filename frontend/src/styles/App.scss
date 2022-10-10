@@ -8,10 +8,11 @@
 @use './layout/header';
 @use './layout/createPostSection';
 @use './layout/postCard';
+@use './layout/postsFeed';
 
 
 body {
-    background-color: variables.$bg2;
+    background-color: variables.$bgColor2;
     
     * {
         box-sizing: border-box;
@@ -27,7 +28,6 @@ body {
         flex-flow: row wrap;
         min-width: 320px;
         max-width: 480px;
-        border: 2px solid red;
         margin: auto;
         position: relative;
         //height: 2000px;
@@ -36,7 +36,7 @@ body {
         & > * {
             width: 100%;
             margin-bottom: 5px;
-            background-color: variables.$bg1;
+            background-color: variables.$bgColor1;
             padding: 0px 10px 30px;
             border-radius: 5px;
         }

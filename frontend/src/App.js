@@ -11,7 +11,7 @@ function App(props) {
   
   return (
     //Routes stablish a navigation between pages/elements
-    <div className='App'>
+    <div className='app'>
       <Routes>
           <Route path="/" element={<Home />}/>
           <Route path='/login' element={<Login />}/>

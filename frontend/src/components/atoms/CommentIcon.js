@@ -3,7 +3,7 @@ import { faComment } from '@fortawesome/free-solid-svg-icons'
 
 function CommentIcon() {
     return <div className="commentIcon" >
-        <FontAwesomeIcon icon={faComment} />
+        <FontAwesomeIcon  className="icon2" icon={faComment} />
     </div>
 }
 

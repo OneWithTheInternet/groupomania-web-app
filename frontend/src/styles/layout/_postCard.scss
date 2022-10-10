@@ -1,16 +1,27 @@
+@use '../abstracts/variables';
+
 .postCard {
-    background-color: lightcoral;
-    margin: 20px 0px;
-    padding: 3%;
+    background-color: variables.$bgColor1;
+    margin-bottom: 5px;
+    display: inline-block;
+    border-radius: 5px;
+    
+    & > div {
+        padding: 0px 10px;
+        margin: 5px 0px;
+        display: inline-block;
+        width: 100%;
+    }
 
     & .userTag {
         display: flex;
         flex-flow: row wrap;
+        align-items: baseline;
+        
     }
 
     & .commentsCounter {
         display: flex;
         flex-flow: row wrap;
-        margin: 10px 0px;
     }
 }

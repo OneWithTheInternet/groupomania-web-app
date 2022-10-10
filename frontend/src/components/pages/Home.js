@@ -1,6 +1,6 @@
 import Header from '../organisms/Header';
 import CreatePostSection from "../organisms/CreatePostSection.js";
-import NewPostsSection from "../organisms/NewPostsSection.js";
+import PostFeed from '../organisms/PostsFeed';
 import { useState, createContext } from 'react';
 
 //Creating a context to easely share props with other components down the line
@@ -16,7 +16,7 @@ function Home(props) {
       <loggedInContext.Provider value={setIsLoggedIn}>
         <Header />
         <CreatePostSection />
-        <NewPostsSection />
+        <PostFeed />
       </loggedInContext.Provider>  
     </div>
   )

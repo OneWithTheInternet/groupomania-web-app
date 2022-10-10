@@ -1,0 +1,5 @@
+@use '../abstracts/variables';
+
+.mainContainer .postsFeed {
+    background-color: variables.$bgColor2;
+}

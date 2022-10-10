@@ -4,10 +4,18 @@ img {
     max-width: 100%;
 }
 
-svg {
+.icon1 {
     padding: 12px;
     color: variables.$iconColor;
-    background-color: variables.$iconBg;
+    background-color: variables.$bgColor--bright;
+    display: block;
+    border-radius: 50%;
+}
+
+.icon2 {
+    padding: 5px;
+    color: variables.$iconColor--dark;
+    background-color: variables.$bgColor1;
     display: block;
     border-radius: 50%;
 }

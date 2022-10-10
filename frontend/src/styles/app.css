@@ -24,6 +24,10 @@ h4 {
   margin: 0px;
 }
 
+b {
+  font-weight: normal;
+}
+
 form * {
   display: inline-block;
   width: 100%;
@@ -43,10 +47,18 @@ img {
   max-width: 100%;
 }
 
-svg {
+.icon1 {
   padding: 12px;
   color: rgb(255, 255, 255);
   background-color: rgb(30, 163, 220);
+  display: block;
+  border-radius: 50%;
+}
+
+.icon2 {
+  padding: 5px;
+  color: black;
+  background-color: #ffffff;
   display: block;
   border-radius: 50%;
 }
@@ -56,7 +68,7 @@ svg {
 }
 
 .mainContainer .header {
-  background-color: #1a1a1b;
+  background-color: #272735;
   padding: 3%;
   display: flex;
   flex-flow: row wrap;
@@ -107,18 +119,29 @@ svg {
 }
 
 .postCard {
-  background-color: lightcoral;
-  margin: 20px 0px;
-  padding: 3%;
+  background-color: #ffffff;
+  margin-bottom: 5px;
+  display: inline-block;
+  border-radius: 5px;
+}
+.postCard > div {
+  padding: 0px 10px;
+  margin: 5px 0px;
+  display: inline-block;
+  width: 100%;
 }
 .postCard .userTag {
   display: flex;
   flex-flow: row wrap;
+  align-items: baseline;
 }
 .postCard .commentsCounter {
   display: flex;
   flex-flow: row wrap;
-  margin: 10px 0px;
+}
+
+.mainContainer .postsFeed {
+  background-color: rgb(227, 227, 227);
 }
 
 body {
@@ -136,7 +159,6 @@ body .mainContainer {
   flex-flow: row wrap;
   min-width: 320px;
   max-width: 480px;
-  border: 2px solid red;
   margin: auto;
   position: relative;
 }

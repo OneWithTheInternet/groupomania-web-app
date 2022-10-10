@@ -89,8 +89,8 @@ function PostCard() {
 
             <UserTag userNameProp={ post.userName } />  
             {/* using conditionals to render either text of image according to data retrieved */}
-            {post.imageUrl ? <PostImage imageUrlProp={ post.imageUrl } imageAltTextProp={ post.imageAltText }/> : null}
             {post.text ? <PostText textProp={ post.text } /> : null}
+            {post.imageUrl ? <PostImage imageUrlProp={ post.imageUrl } imageAltTextProp={ post.imageAltText }/> : null}
             <CommentsCounter likesCountProp={ post.likesCount } />
         </article>
     ));

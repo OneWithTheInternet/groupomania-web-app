@@ -1,7 +1,7 @@
 import PostCard from "./PostCard"
 
 function NewPostsSection() {
-    return <section className="newPostsSection" >
+    return <section className="postsFeed" >
         <PostCard />
     </section>
 }

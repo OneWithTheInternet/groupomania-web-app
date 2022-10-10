@@ -13,7 +13,7 @@ function UserMenu(props) {
         <UserImage />
 
         <div className='userMenu__arrowContainer'>
-            <FontAwesomeIcon icon={faAngleDown} />
+            <FontAwesomeIcon className="icon2" icon={faAngleDown} />
         </div>
 
         <div className='userMenu__dropdown'>
