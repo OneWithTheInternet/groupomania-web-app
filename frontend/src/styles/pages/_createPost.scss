@@ -1,0 +1,9 @@
+@use '../abstracts/_mixins.scss';
+
+.createPost {
+    //Selecting the second input (text input) element in this specific form
+    &__form :nth-child(2) input {
+        height: 200px;
+    }
+}
+

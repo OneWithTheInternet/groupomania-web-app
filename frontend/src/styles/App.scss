@@ -1,10 +1,45 @@
-@use "./base/typography";
+@use './abstracts/variables';
 @use './abstracts/mixins';
+@use "./base/typography";
+@use "./base/forms";
+@use './base/images';
+@use './pages/createPost';
+@use './pages/login';
 @use './layout/header';
 @use './layout/createPostSection';
 @use './layout/postCard';
 
 
 body {
-    @include mixins.base-styles;
+    background-color: variables.$bg2;
+    
+    * {
+        box-sizing: border-box;
+    }
+
+    & a {
+        text-decoration: none;
+        color: variables.$text-color;
+    }
+    
+    & .mainContainer {
+        display: flex;
+        flex-flow: row wrap;
+        min-width: 320px;
+        max-width: 480px;
+        border: 2px solid red;
+        margin: auto;
+        position: relative;
+        //height: 2000px;
+
+        //selecting all (*) direct decendants (>) of the main container
+        & > * {
+            width: 100%;
+            margin-bottom: 5px;
+            background-color: variables.$bg1;
+            padding: 0px 10px 30px;
+            border-radius: 5px;
+        }
+    }
 }
+

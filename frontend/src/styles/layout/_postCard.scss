@@ -2,4 +2,15 @@
     background-color: lightcoral;
     margin: 20px 0px;
     padding: 3%;
+
+    & .userTag {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    & .commentsCounter {
+        display: flex;
+        flex-flow: row wrap;
+        margin: 10px 0px;
+    }
 }

@@ -1,14 +1,15 @@
 import TextField from "../atoms/TextField"
 import ImageIcon from "../atoms/ImageIcon"
-import UserIcon from "../atoms/UserIcon"
+import UserImage from "../atoms/UserImage"
 
 function CreatePostSection() {
-    return <section className="createPostSection">
-        <UserIcon />
-        <a href="#">
+    return <section>
+        <h1>Create a Post</h1>
+        <div className="createPostSection">
+            <UserImage />
             <TextField />
             <ImageIcon />
-        </a>
+        </div>
     </section>
 }
 

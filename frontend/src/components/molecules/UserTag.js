@@ -1,5 +1,5 @@
 import UserName from "../atoms/UserName";
-import UserIcon from '../atoms/UserIcon';
+import UserImage from '../atoms/UserImage';
 import DeleteIcon from "../atoms/DeleteIcon";
 
 
@@ -7,7 +7,7 @@ function UserTag(props) {
     //Assigning variables to props
     const { userNameProp } = props;
     return <div className="userTag">
-        <UserIcon />
+        <UserImage />
         <UserName userNameProp={ userNameProp }/>
         <DeleteIcon />
     </div>

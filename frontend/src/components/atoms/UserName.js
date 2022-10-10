@@ -3,7 +3,7 @@ function UserName(props) {
    const { userNameProp } = props
     return <div className="userName">
         {/* accessing username from prop and printing in tag bellow */}
-        <b><strong>{props.userNameProp}</strong></b>
+        <b><strong>{userNameProp}</strong></b>
     </div>
 }
 

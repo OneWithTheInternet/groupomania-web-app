@@ -1,11 +1,14 @@
 import CommentIcon from "../atoms/CommentIcon"
 
 
-function CommentsCounter() {
+function CommentsCounter(props) {
+    //Assingning variables to props values
+    const likesCountProp = props.likesCountProp;
+
     return <div className="commentsCounter" >
         <CommentIcon />
         <div className="commentsCounter__number">
-            <b>0</b>
+            <b>{ likesCountProp }</b>
         </div>
     </div>
 }

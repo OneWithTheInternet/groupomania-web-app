@@ -1,0 +1,16 @@
+@use '../abstracts/variables';
+
+form * {
+    display: inline-block;
+    width: 100%;    
+}
+
+form label {
+    font-weight: bold;
+    margin: 10px 0px;
+}
+
+form input {
+    margin-top: 10px;
+    height: variables.$textInputHeight--default;
+}

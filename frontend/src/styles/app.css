@@ -10,7 +10,7 @@ p {
 
 h1 {
   font-size: 24px;
-  margin: 60px 0px 30px 0px;
+  margin: 20px 0px 30px 0px;
 }
 
 h3 {
@@ -24,33 +24,86 @@ h4 {
   margin: 0px;
 }
 
-header {
-  background-color: rgb(221, 221, 221);
+form * {
+  display: inline-block;
+  width: 100%;
+}
+
+form label {
+  font-weight: bold;
+  margin: 10px 0px;
+}
+
+form input {
+  margin-top: 10px;
+  height: 40px;
+}
+
+img {
+  max-width: 100%;
+}
+
+svg {
+  padding: 12px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(30, 163, 220);
+  display: block;
+  border-radius: 50%;
+}
+
+.createPost__form :nth-child(2) input {
+  height: 200px;
+}
+
+.mainContainer .header {
+  background-color: #1a1a1b;
   padding: 3%;
   display: flex;
   flex-flow: row wrap;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  position: relative;
 }
-header .logoContainer {
-  background-color: aquamarine;
-  max-width: 50%;
+.mainContainer .header .logoContainer {
+  max-width: 40%;
   min-width: 25%;
 }
-header .userMenu {
+
+.userMenu {
   display: flex;
   flex-flow: row wrap;
+}
+.userMenu__dropdown {
+  visibility: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: absolute;
+  right: 0;
+  top: 100%;
+}
+.userMenu__dropdown:hover {
+  visibility: visible;
 }
 
 .createPostSection {
-  background-color: beige;
-  display: flex;
-  flex-flow: row wrap;
-  margin: 20px 0px;
   width: 100%;
-}
-.createPostSection a {
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-between;
+  align-content: center;
+}
+.createPostSection > div {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: center;
+}
+.createPostSection .textInputContainer {
+  width: 80%;
+}
+.createPostSection input {
+  height: 40px;
+  display: block;
+  width: 100%;
 }
 
 .postCard {
@@ -58,9 +111,18 @@ header .userMenu {
   margin: 20px 0px;
   padding: 3%;
 }
+.postCard .userTag {
+  display: flex;
+  flex-flow: row wrap;
+}
+.postCard .commentsCounter {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 10px 0px;
+}
 
 body {
-  background-color: #ffffff;
+  background-color: rgb(227, 227, 227);
 }
 body * {
   box-sizing: border-box;
@@ -69,16 +131,19 @@ body a {
   text-decoration: none;
   color: #000000;
 }
-body .App {
+body .mainContainer {
   display: flex;
   flex-flow: row wrap;
   min-width: 320px;
   max-width: 480px;
-  border: solid red 3px;
-  padding: 0px 10px;
+  border: 2px solid red;
   margin: auto;
   position: relative;
 }
-body img {
-  max-width: 100%;
-}/*# sourceMappingURL=app.css.map */
+body .mainContainer > * {
+  width: 100%;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+  padding: 0px 10px 30px;
+  border-radius: 5px;
+}/*# sourceMappingURL=App.css.map */

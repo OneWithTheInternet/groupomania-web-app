@@ -1,0 +1,13 @@
+@use '../abstracts/variables';
+
+img {
+    max-width: 100%;
+}
+
+svg {
+    padding: 12px;
+    color: variables.$iconColor;
+    background-color: variables.$iconBg;
+    display: block;
+    border-radius: 50%;
+}

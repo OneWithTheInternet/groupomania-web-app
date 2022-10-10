@@ -1,12 +1,26 @@
+@use '../abstracts/variables';
+
 .createPostSection {
-    background-color: beige;
+    width: 100%;
     display: flex;
     flex-flow: row wrap;
-    margin: 20px 0px;
-    width: 100%;
+    justify-content: space-between;
+    align-content: center;
 
-    & a {
+    & > div {
         display: flex;
         flex-flow: row wrap;
+        align-content: center;
+        justify-content: center;
+    }
+    
+    & .textInputContainer {
+        width: 80%;
+    }
+
+    & input {
+        height: variables.$textInputHeight--default;
+        display: block;
+        width: 100%;
     }
 }

@@ -6,4 +6,4 @@ Backend's RESTful API developed with Express.
 
 MySql database.
 
-This was my final project for web dev school.
+This is my final project for web dev school.

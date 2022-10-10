@@ -50,8 +50,8 @@ let allPosts = [
         text: "sample Text 3. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
         commentsList: [null],
         commentsCount: 0,
-        usersLiked: [null],
-        likesCount: 0,
+        usersLiked: ["224"],
+        likesCount: 1,
         usersDisLiked: [null],
         dislikesCount: 0,
         yearReleased: "1998"
@@ -75,18 +75,23 @@ let allPosts = [
 ]
 
 
+//dummie React event for practice
+function testFunction(event) {
+    console.log('The user is', event)
+}
+
 //JSX element
 function PostCard() {
     //Using map() method to loop over data array and create each post from it
     let allPostsCards = allPosts.map((post) => (
-        
-       <article className="postCard" key={ post.postId }>
+        //addding an article DOM element with envent handler
+       <article className="postCard" key={ post.postId } onClick={ testFunction }>
 
             <UserTag userNameProp={ post.userName } />  
             {/* using conditionals to render either text of image according to data retrieved */}
             {post.imageUrl ? <PostImage imageUrlProp={ post.imageUrl } imageAltTextProp={ post.imageAltText }/> : null}
             {post.text ? <PostText textProp={ post.text } /> : null}
-            <CommentsCounter />
+            <CommentsCounter likesCountProp={ post.likesCount } />
         </article>
     ));
 

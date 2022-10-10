@@ -1,18 +1,35 @@
-header {
-    background-color: rgb(221, 221, 221);
+@use '../abstracts/variables';
+
+.mainContainer .header {
+    background-color: variables.$bg3--dark;
     padding: 3%;
     display: flex;
     flex-flow: row wrap;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    position: relative;
 
     & .logoContainer {
-        background-color: aquamarine;
-        max-width: 50%;
+        max-width: 40%;
         min-width: 25%;
     }
+}
 
-    & .userMenu {
-        display: flex;
-        flex-flow: row wrap;
+.userMenu {
+    display: flex;
+    flex-flow: row wrap;
+
+    &__dropdown {
+        //hidning element from view
+        visibility: hidden;
+        background-color: variables.$bg1;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        position: absolute;
+        right: 0;
+        top: 100%;
+    }
+
+    &__dropdown:hover {
+        //hidning element from view
+        visibility: visible;
     }
 }
