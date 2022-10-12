@@ -5,6 +5,7 @@ import PostImage from "../atoms/PostImage";
 import PostText from "../atoms/PostText";
 import CommentsCounter from "../molecules/CommentsCounter";
 import UserTag from "../molecules/UserTag";
+import {Link} from 'react-router-dom';
 
 //dummie data simulating api response
 let allPosts = [
@@ -86,12 +87,13 @@ function PostCard() {
     let allPostsCards = allPosts.map((post) => (
         //addding an article DOM element with envent handler
        <article className="postCard" key={ post.postId } onClick={ testFunction }>
-
-            <UserTag userNameProp={ post.userName } />  
-            {/* using conditionals to render either text of image according to data retrieved */}
-            {post.text ? <PostText textProp={ post.text } /> : null}
-            {post.imageUrl ? <PostImage imageUrlProp={ post.imageUrl } imageAltTextProp={ post.imageAltText }/> : null}
-            <CommentsCounter likesCountProp={ post.likesCount } />
+            <Link to='post/:id'>
+                <UserTag userNameProp={ post.userName } />  
+                {/* using conditionals to render either text of image according to data retrieved */}
+                {post.text ? <PostText textProp={ post.text } /> : null}
+                {post.imageUrl ? <PostImage imageUrlProp={ post.imageUrl } imageAltTextProp={ post.imageAltText }/> : null}
+                <CommentsCounter likesCountProp={ post.likesCount } />
+            </Link>
         </article>
     ));
 

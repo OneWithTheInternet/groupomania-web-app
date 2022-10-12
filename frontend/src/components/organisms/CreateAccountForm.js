@@ -3,12 +3,14 @@ import { useState } from "react";
 import SubmitButton from "../atoms/SubmitButton";
 
 function CreateAccountForm() {
-    //Creating useState to store user's input in as variables
+    //Using useState to store user's input in as variables
+    const [nameValue, setNameValue] = useState('');
+    const [userNameValue, setUserNameValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
-    const [userNameValue, setUserNameValue] = useState('');
     //Object to be submitted as API request data
     const userLoginInfo = {
+        name: nameValue,
         userName: userNameValue,
         email: emailValue,
         password: passwordValue
@@ -28,11 +30,21 @@ function CreateAccountForm() {
     
     return (
         <form className="createAccount__form" onSubmit={(event) => {handleSubmit(event)}}>
+            <label>Name
+                <input 
+                    type="text"
+                    value={ nameValue } 
+                    placeholder={"Write full name"}
+                    //Accessing the value after user's input. Setting the value to variable "inputValue""
+                    onChange={(event) => setNameValue(event.target.value)}
+                />
+            </label>
+
             <label>User Name
                 <input 
                     type="text"
                     value={ userNameValue } 
-                    placeholder={"Write full name"}
+                    placeholder={"Create a user name"}
                     //Accessing the value after user's input. Setting the value to variable "inputValue""
                     onChange={(event) => setUserNameValue(event.target.value)}
                 />

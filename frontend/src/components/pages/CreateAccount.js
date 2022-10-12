@@ -4,8 +4,7 @@ import CreateAccountForm from '../organisms/CreateAccountForm';
 
 function CreateAccount() {
   return (
-    <div className='mainContainer'>
-      <Header />
+    <div>
       <section className="createAccount">
         <h1>Create Account</h1>
         <CreateAccountForm />

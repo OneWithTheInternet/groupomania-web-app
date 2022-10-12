@@ -1,10 +1,11 @@
 import logo from "../../assets/icon-left-font-monochrome-black.svg"
+import {Link} from 'react-router-dom'
 
 function MainLogo() {
     return <div className="logoContainer">
-            <a href="/">
-                <img className="logoContainer__logo" alt="groupomania logo" src={logo} />
-            </a>
+        <Link to="/"> 
+            <img className="logoContainer__logo" alt="groupomania logo" src={logo} />
+        </Link>
     </div>
 }
 

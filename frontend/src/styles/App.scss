@@ -33,7 +33,8 @@ body {
         //height: 2000px;
 
         //selecting all (*) direct decendants (>) of the main container
-        & > * {
+        & section {
+            display: inline-block;
             width: 100%;
             margin-bottom: 5px;
             background-color: variables.$bgColor1;

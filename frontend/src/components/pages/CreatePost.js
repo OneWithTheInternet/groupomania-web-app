@@ -4,10 +4,7 @@ import Header from '../organisms/Header'
 function CreatePost() {
   return (
 
-    <div className='mainContainer'>
-
-        <Header />
-
+    <div>
         <section className='createPost'>
             <div className='createPost__title'><h1>Create a Post</h1></div>
             <form className='createPost__form'>

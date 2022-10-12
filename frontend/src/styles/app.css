@@ -69,7 +69,8 @@ img {
 
 .mainContainer .header {
   background-color: #272735;
-  padding: 3%;
+  padding: 10px;
+  margin-bottom: 5px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -85,7 +86,6 @@ img {
   flex-flow: row wrap;
 }
 .userMenu__dropdown {
-  visibility: hidden;
   background-color: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   position: absolute;
@@ -98,12 +98,15 @@ img {
 
 .createPostSection {
   width: 100%;
+}
+.createPostSection a {
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-content: center;
 }
-.createPostSection > div {
+.createPostSection .userImageContainer, .createPostSection .textInputContainer, .createPostSection .uploadIcon {
   display: flex;
   flex-flow: row wrap;
   align-content: center;
@@ -124,7 +127,7 @@ img {
   display: inline-block;
   border-radius: 5px;
 }
-.postCard > div {
+.postCard .userTag, .postCard .postText, .postCard .commentsCounter {
   padding: 0px 10px;
   margin: 5px 0px;
   display: inline-block;
@@ -162,7 +165,8 @@ body .mainContainer {
   margin: auto;
   position: relative;
 }
-body .mainContainer > * {
+body .mainContainer section {
+  display: inline-block;
   width: 100%;
   margin-bottom: 5px;
   background-color: #ffffff;

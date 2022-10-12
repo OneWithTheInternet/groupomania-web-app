@@ -12,9 +12,9 @@ function Home(props) {
   const [ isLoggedIn, setIsLoggedIn ] = useState(true);
 
   return (
-    <div className="mainContainer">
+    <div>
+      {/* Using react context to pas "value" property as a universal prop */}
       <loggedInContext.Provider value={setIsLoggedIn}>
-        <Header />
         <CreatePostSection />
         <PostFeed />
       </loggedInContext.Provider>  

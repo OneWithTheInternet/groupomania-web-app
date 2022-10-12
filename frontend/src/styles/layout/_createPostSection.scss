@@ -2,18 +2,22 @@
 
 .createPostSection {
     width: 100%;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-content: center;
 
-    & > div {
+    & a {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-content: center;
+    }
+
+    & .userImageContainer, .textInputContainer, .uploadIcon {
         display: flex;
         flex-flow: row wrap;
         align-content: center;
         justify-content: center;
     }
-    
+
     & .textInputContainer {
         width: 80%;
     }

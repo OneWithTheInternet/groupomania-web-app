@@ -13,8 +13,7 @@ import image from '../../assets/sample-image.jpeg'
 function Post() {
 
   return (
-    <div className='mainContainer'>
-      <Header />
+    <div>
       <section className='post' >
         <UserTag userNameProp={"william"} />
 
