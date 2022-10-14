@@ -75,18 +75,12 @@ let allPosts = [
     }
 ]
 
-
-//dummie React event for practice
-function testFunction(event) {
-    console.log('The user is', event)
-}
-
 //JSX element
 function PostCard() {
     //Using map() method to loop over data array and create each post from it
     let allPostsCards = allPosts.map((post) => (
         //addding an article DOM element with envent handler
-       <article className="postCard" key={ post.postId } onClick={ testFunction }>
+       <article className="postCard" key={ post.postId }>
             <Link to='post/:id'>
                 <UserTag userNameProp={ post.userName } />  
                 {/* using conditionals to render either text of image according to data retrieved */}

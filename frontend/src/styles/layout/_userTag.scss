@@ -1,0 +1,23 @@
+@use '../abstracts/variables';
+
+.userTag {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: variables.$lineMargins;
+    
+    &__userContainer {
+        display: inline-block;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: baseline;
+
+        &__imageContainer {
+            margin-right: 10px;
+        }
+    }
+
+}

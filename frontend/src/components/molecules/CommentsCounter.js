@@ -8,7 +8,7 @@ function CommentsCounter(props) {
     return <div className="commentsCounter" >
         <CommentIcon />
         <div className="commentsCounter__number">
-            <b>{ likesCountProp }</b>
+            <b>{ likesCountProp } comments</b>
         </div>
     </div>
 }

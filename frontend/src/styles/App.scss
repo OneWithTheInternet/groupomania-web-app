@@ -5,11 +5,14 @@
 @use './base/images';
 @use './pages/createPost';
 @use './pages/login';
+@use './pages/post';
 @use './layout/header';
 @use './layout/createPostSection';
 @use './layout/postCard';
 @use './layout/postsFeed';
-
+@use './layout/userTag';
+@use './layout/commentsCounter';
+@use './layout/comment';
 
 body {
     background-color: variables.$bgColor2;
@@ -23,6 +26,10 @@ body {
         color: variables.$text-color;
     }
     
+    & .sectionsContainer {
+        width: 100%;
+    }
+
     & .mainContainer {
         display: flex;
         flex-flow: row wrap;
@@ -30,7 +37,6 @@ body {
         max-width: 480px;
         margin: auto;
         position: relative;
-        //height: 2000px;
 
         //selecting all (*) direct decendants (>) of the main container
         & section {

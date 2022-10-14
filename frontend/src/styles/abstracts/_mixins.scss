@@ -1,1 +1,13 @@
 @use './variables';
+
+@mixin postText {
+    margin: variables.$lineMargins;
+    display: inline-block;
+    width: 100%;
+}
+
+@mixin comment__text {
+    margin: variables.$lineMargins;
+    display: inline-block;
+    width: 100%;
+}

@@ -7,30 +7,57 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    position: relative;
 
     & .logoContainer {
         max-width: 40%;
         min-width: 25%;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
     }
 }
 
 .userMenu {
     display: flex;
     flex-flow: row wrap;
+}
 
-    &__dropdown {
-        //hidning element from view
-        //visibility: hidden;
+.dropdown {
+    position: relative;
+    z-index: 10;
+
+
+    &__arrowContainer {
+        
+    }
+
+    &__menu {
+        display: none;
+        width: 700%;
+        position: absolute;
         background-color: variables.$bgColor1;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        position: absolute;
         right: 0;
-        top: 100%;
-    }
+        top: 125%;
+        padding: 15px 20px;
+        margin-top: 0px;
+        list-style-type: none;
 
-    &__dropdown:hover {
-        //hidning element from view
-        visibility: visible;
+        & li {
+            display:inline-block;
+            margin: 10px 0px;
+            text-decoration: underline;
+        }
+
+        //selecting the user's name and removing underline
+        & :nth-child(1) {
+            text-decoration: none;
+        }
     }
+}
+
+//selecting the dropdown menu when the dropdown element that contains it is hovered over
+.dropdown:hover .dropdown__menu {
+    display: flex;
+    flex-flow: row wrap;
 }

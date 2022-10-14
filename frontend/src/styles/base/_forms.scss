@@ -14,3 +14,7 @@ form input {
     margin-top: 10px;
     height: variables.$textInputHeight--default;
 }
+
+textarea {
+    resize: none;
+}

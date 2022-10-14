@@ -7,8 +7,10 @@ function UserTag(props) {
     //Assigning variables to props
     const { userNameProp } = props;
     return <div className="userTag">
-        <UserImage />
-        <UserName userNameProp={ userNameProp }/>
+        <div className="userTag__userContainer">
+            <UserImage />
+            <UserName userNameProp={ userNameProp }/>
+        </div>
         <DeleteIcon />
     </div>
 }

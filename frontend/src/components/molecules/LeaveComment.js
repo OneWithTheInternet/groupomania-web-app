@@ -5,7 +5,7 @@ function LeaveComment() {
   return (
     <div className='leaveComment'>
         <UserTag userNameProp={'Your Name'}/>
-        <textarea placeholder='Write a Comment'></textarea>
+        <textarea placeholder='Leave a Comment'></textarea>
     </div>
   )
 }

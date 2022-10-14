@@ -1,12 +1,11 @@
-import Header from '../organisms/Header';
 import LoginForm from '../organisms/LoginForm';
 import { Link } from 'react-router-dom';
 
-//import Header from '../organisms/Header';
+
 
 function Login() {
   return (
-    <div>
+    <div className='sectionsContainer'>
       <section className="login">
         <h1>Log in</h1>
         <LoginForm />

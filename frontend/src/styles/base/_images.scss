@@ -1,7 +1,8 @@
 @use '../abstracts/variables';
 
 img {
-    max-width: 100%;
+    width: 100%;
+    margin: variables.$lineMargins;
 }
 
 .icon1 {

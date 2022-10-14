@@ -1,10 +1,13 @@
-import React from 'react'
-import Header from '../organisms/Header'
+import { useContext } from "react"
+import { urlContext } from "../../App"
 
 function CreatePost() {
-  return (
 
-    <div>
+    //importing state changing function from App.js
+    const setCurrentUrl = useContext(urlContext);
+  
+    return (
+    <div className='sectionsContainer'>
         <section className='createPost'>
             <div className='createPost__title'><h1>Create a Post</h1></div>
             <form className='createPost__form'>
@@ -16,7 +19,7 @@ function CreatePost() {
 
                 <label>
                     Share your thoughts
-                    <input type={"text"} placeholder="Share something with your pals"/>
+                    <textarea placeholder="Share something with your pals"></textarea>
                 </label>
                 
                 <input type="submit"/>

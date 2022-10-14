@@ -1,10 +1,9 @@
 import React from 'react';
 import PostText from '../atoms/PostText';
 import UserTag from '../molecules/UserTag';
-import Header from '../organisms/Header';
 import Comment from '../organisms/Comment';
 import LeaveComment from '../molecules/LeaveComment';
-
+import CommentsCounter from '../molecules/CommentsCounter.js'
 
 
 //delete this later
@@ -13,8 +12,8 @@ import image from '../../assets/sample-image.jpeg'
 function Post() {
 
   return (
-    <div>
-      <section className='post' >
+    <div className='sectionsContainer'>
+      <section className='postContent' >
         <UserTag userNameProp={"william"} />
 
         <PostText textProp={'whatever'} />
@@ -23,11 +22,14 @@ function Post() {
       </section>
 
       <section className='comments'>
+      <CommentsCounter />
+      <hr></hr>
         {/* use map() method on this comment to load comments according to data */}
+        <Comment />
         <Comment />
       </section>
 
-      <section className='leaveComments'>
+      <section className='leaveCommentsSection'>
         {/* use map() method on this comment to load comments according to data */}
         <LeaveComment />
       </section>

@@ -43,8 +43,13 @@ form input {
   height: 40px;
 }
 
+textarea {
+  resize: none;
+}
+
 img {
-  max-width: 100%;
+  width: 100%;
+  margin: 5px 0px;
 }
 
 .icon1 {
@@ -63,8 +68,25 @@ img {
   border-radius: 50%;
 }
 
-.createPost__form :nth-child(2) input {
-  height: 200px;
+.createPost__form label textarea {
+  height: 100px;
+}
+
+.postContent .postText {
+  margin: 5px 0px;
+  display: inline-block;
+  width: 100%;
+}
+
+.comment__text {
+  margin: 5px 0px;
+  display: inline-block;
+  width: 100%;
+}
+
+.leaveComment textarea {
+  width: 100%;
+  height: 100px;
 }
 
 .mainContainer .header {
@@ -74,26 +96,48 @@ img {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  position: relative;
 }
 .mainContainer .header .logoContainer {
   max-width: 40%;
   min-width: 25%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
 }
 
 .userMenu {
   display: flex;
   flex-flow: row wrap;
 }
-.userMenu__dropdown {
+
+.dropdown {
+  position: relative;
+  z-index: 10;
+}
+.dropdown__menu {
+  display: none;
+  width: 700%;
+  position: absolute;
   background-color: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  position: absolute;
   right: 0;
-  top: 100%;
+  top: 125%;
+  padding: 15px 20px;
+  margin-top: 0px;
+  list-style-type: none;
 }
-.userMenu__dropdown:hover {
-  visibility: visible;
+.dropdown__menu li {
+  display: inline-block;
+  margin: 10px 0px;
+  text-decoration: underline;
+}
+.dropdown__menu :nth-child(1) {
+  text-decoration: none;
+}
+
+.dropdown:hover .dropdown__menu {
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .createPostSection {
@@ -127,16 +171,14 @@ img {
   display: inline-block;
   border-radius: 5px;
 }
-.postCard .userTag, .postCard .postText, .postCard .commentsCounter {
+.postCard .postText, .postCard .commentsCounter {
   padding: 0px 10px;
   margin: 5px 0px;
   display: inline-block;
   width: 100%;
 }
 .postCard .userTag {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: baseline;
+  padding: 0px 10px;
 }
 .postCard .commentsCounter {
   display: flex;
@@ -145,6 +187,39 @@ img {
 
 .mainContainer .postsFeed {
   background-color: rgb(227, 227, 227);
+  padding: 0;
+}
+
+.userTag {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 5px 0px;
+}
+.userTag__userContainer {
+  display: inline-block;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+}
+.userTag__userContainer__imageContainer {
+  margin-right: 10px;
+}
+
+.commentsCounter {
+  display: flex;
+  align-items: baseline;
+  margin: 5px 0px;
+}
+
+.comment {
+  padding: 10px;
+  margin: 5px 0px;
+  border-radius: 5px;
+  margin-bottom: 15px;
 }
 
 body {
@@ -156,6 +231,9 @@ body * {
 body a {
   text-decoration: none;
   color: #000000;
+}
+body .sectionsContainer {
+  width: 100%;
 }
 body .mainContainer {
   display: flex;
