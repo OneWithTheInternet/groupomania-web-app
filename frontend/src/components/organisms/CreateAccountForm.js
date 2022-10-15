@@ -30,11 +30,14 @@ function CreateAccountForm() {
     
     return (
         <form className="createAccount__form" onSubmit={(event) => {handleSubmit(event)}}>
+            <div className="errorMessage"></div>
+            
             <label>Name
                 <input 
                     type="text"
                     value={ nameValue } 
-                    placeholder={"Write full name"}
+                    placeholder={"Write full name"}                    required
+                    maxLength={20}
                     //Accessing the value after user's input. Setting the value to variable "inputValue""
                     onChange={(event) => setNameValue(event.target.value)}
                 />
@@ -45,6 +48,9 @@ function CreateAccountForm() {
                     type="text"
                     value={ userNameValue } 
                     placeholder={"Create a user name"}
+                    required
+                    maxLength={20}
+                    minLength={6}
                     //Accessing the value after user's input. Setting the value to variable "inputValue""
                     onChange={(event) => setUserNameValue(event.target.value)}
                 />
@@ -55,6 +61,7 @@ function CreateAccountForm() {
                     type="email"
                     value={ emailValue } 
                     placeholder={ "example@example.com" }
+                    required
                     //Accessing the value after user's input. Setting the value to variable "inputValue""
                     onChange={(event) => setEmailValue(event.target.value)}
                 />
@@ -64,6 +71,9 @@ function CreateAccountForm() {
                 <input 
                     type="password"
                     value={ passwordValue } 
+                    required
+                    maxLength={20}
+                    minLength={6}
                     //Accessing the value after user's input. Setting the value to variable "inputValue""
                     onChange={(event) => setPasswordValue(event.target.value)}
                 />

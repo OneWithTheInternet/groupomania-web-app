@@ -26,11 +26,14 @@ function LoginForm() {
     
     return (
         <form className="login__form" onSubmit={(event) => {handleSubmit(event)}}>
+            <div className="errorMessage"></div>        
+        
             <label>email
                 <input 
                     type="email"
                     value={ emailValue } 
                     placeholder={ "example@example.com" }
+                    required
                     //Accessing the value after user's input. Setting the value to variable "inputValue""
                     onChange={(event) => setEmailValue(event.target.value)}
                 />
@@ -40,6 +43,9 @@ function LoginForm() {
                 <input 
                     type="password"
                     value={ passwordValue } 
+                    required
+                    maxLength={20}
+                    minLength={6}
                     //Accessing the value after user's input. Setting the value to variable "inputValue""
                     onChange={(event) => setPasswordValue(event.target.value)}
                 />

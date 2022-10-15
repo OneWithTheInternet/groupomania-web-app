@@ -1,19 +1,26 @@
 @use '../abstracts/variables';
 
-.mainContainer .header {
+.app .headerContainer { 
     background-color: variables.$bgColor--dark;
-    padding: 10px;
-    margin-bottom: 5px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
 
-    & .logoContainer {
-        max-width: 40%;
-        min-width: 25%;
+    & .header {
+        padding: 10px;
+        margin: auto;
+        margin-bottom: 5px;
         display: flex;
         flex-flow: row wrap;
-        align-items: center;
+        justify-content: space-between;
+        min-width: 320px;
+        max-width: 480px;
+        position: relative;
+    
+        & .logoContainer {
+            max-width: 40%;
+            min-width: 25%;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+        }
     }
 }
 

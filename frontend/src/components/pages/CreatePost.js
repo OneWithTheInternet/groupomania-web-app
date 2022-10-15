@@ -1,10 +1,6 @@
-import { useContext } from "react"
-import { urlContext } from "../../App"
+import TextArea from "../atoms/TextArea";
 
 function CreatePost() {
-
-    //importing state changing function from App.js
-    const setCurrentUrl = useContext(urlContext);
   
     return (
     <div className='sectionsContainer'>
@@ -19,7 +15,7 @@ function CreatePost() {
 
                 <label>
                     Share your thoughts
-                    <textarea placeholder="Share something with your pals"></textarea>
+                    <TextArea placeholder='Write here...'/>
                 </label>
                 
                 <input type="submit"/>

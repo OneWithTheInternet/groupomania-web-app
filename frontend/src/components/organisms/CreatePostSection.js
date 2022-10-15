@@ -1,4 +1,4 @@
-import TextField from "../atoms/TextField"
+import TextInput from "../atoms/TextInput"
 import ImageIcon from "../atoms/ImageIcon"
 import UserImage from "../atoms/UserImage"
 import {Link} from 'react-router-dom'
@@ -11,7 +11,7 @@ function CreatePostSection() {
         <div className="createPostSection">
             <Link to="/createpost">
                 <UserImage />
-                <TextField value="Write your text here..." />
+                <TextInput value="Write your text here..." />
                 <ImageIcon />
             </Link>
         </div>

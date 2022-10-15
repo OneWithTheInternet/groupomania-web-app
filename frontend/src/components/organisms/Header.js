@@ -9,21 +9,23 @@ import AccountSettings from "../pages/AccountSettings";
 
 function Header(props) {
     return (
-        <header className="header">
-            {/* component will be rendered in all pages */}
-            <MainLogo /> 
-            
-            {/* component will be rendered in the specified routed pages */}
-            <Routes>
-                <Route element={<UserMenu />} >
-                    <Route path="/" element={<Home />}/>
-                    <Route path="/post/:id" element={<Post />}/>
-                    <Route path='/createpost' element={<CreatePost />}/>
-                    <Route path='/account-settings' element={<AccountSettings />} />
-                </Route>
-            </Routes>
-            {/* <UserMenu /> */}
-        </header>
+        <div className="headerContainer">
+            <header className="header">
+                {/* component will be rendered in all pages */}
+                <MainLogo /> 
+                
+                {/* component will be rendered in the specified routed pages */}
+                <Routes>
+                    <Route element={<UserMenu />} >
+                        <Route path="/" element={<Home />}/>
+                        <Route path="/post/:id" element={<Post />}/>
+                        <Route path='/createpost' element={<CreatePost />}/>
+                        <Route path='/account-settings' element={<AccountSettings />} />
+                    </Route>
+                </Routes>
+                {/* <UserMenu /> */}
+            </header>
+        </div>
     )
 }
 

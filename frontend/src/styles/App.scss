@@ -16,6 +16,7 @@
 
 body {
     background-color: variables.$bgColor2;
+    min-width: 320px;
     
     * {
         box-sizing: border-box;
@@ -48,5 +49,6 @@ body {
             border-radius: 5px;
         }
     }
+
 }
 

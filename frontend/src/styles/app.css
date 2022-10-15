@@ -47,17 +47,23 @@ textarea {
   resize: none;
 }
 
+form .errorMessage {
+  color: red;
+  margin: 10px 0px;
+}
+
 img {
   width: 100%;
   margin: 5px 0px;
 }
 
 .icon1 {
-  padding: 12px;
+  padding: 8px;
   color: rgb(255, 255, 255);
   background-color: rgb(30, 163, 220);
-  display: block;
+  display: inline-block;
   border-radius: 50%;
+  font-size: small;
 }
 
 .icon2 {
@@ -89,15 +95,21 @@ img {
   height: 100px;
 }
 
-.mainContainer .header {
+.app .headerContainer {
   background-color: #272735;
+}
+.app .headerContainer .header {
   padding: 10px;
+  margin: auto;
   margin-bottom: 5px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  min-width: 320px;
+  max-width: 480px;
+  position: relative;
 }
-.mainContainer .header .logoContainer {
+.app .headerContainer .header .logoContainer {
   max-width: 40%;
   min-width: 25%;
   display: flex;
@@ -205,8 +217,8 @@ img {
   flex-flow: row wrap;
   align-items: baseline;
 }
-.userTag__userContainer__imageContainer {
-  margin-right: 10px;
+.userTag__userContainer__nameContainer {
+  margin-left: 10px;
 }
 
 .commentsCounter {
@@ -218,12 +230,13 @@ img {
 .comment {
   padding: 10px;
   margin: 5px 0px;
-  border-radius: 5px;
   margin-bottom: 15px;
+  border-left: solid lightgray 4px;
 }
 
 body {
   background-color: rgb(227, 227, 227);
+  min-width: 320px;
 }
 body * {
   box-sizing: border-box;
