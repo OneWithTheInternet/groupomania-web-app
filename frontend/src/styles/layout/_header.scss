@@ -63,7 +63,7 @@
     }
 }
 
-//selecting the dropdown menu when the dropdown element that contains it is hovered over
+//selecting the dropdown menu when the dropdown element that contains it is clicked over
 .dropdown:hover .dropdown__menu {
     display: flex;
     flex-flow: row wrap;

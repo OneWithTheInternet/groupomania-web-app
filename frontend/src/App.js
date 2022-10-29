@@ -31,8 +31,8 @@ function App() {
         {/* <urlContext.Provider value={setCurrentUrl}> */}
           {/* Routes stablish a navigation between pages/elements */}
           <Routes>
-            <Route path='/login' element={<Login />} />
-            <Route path='/createaccount' element={<CreateAccount />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/createaccount" element={<CreateAccount />} />
             <Route path="/" element={<Home />} />
             <Route path='/createpost' element={<CreatePost />} />
             <Route path='/post/:id' element={<Post />} />

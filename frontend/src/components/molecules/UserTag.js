@@ -5,11 +5,11 @@ import DeleteIcon from "../atoms/DeleteIcon";
 
 function UserTag(props) {
     //Assigning variables to props
-    const { userNameProp } = props;
+
     return <div className="userTag">
         <div className="userTag__userContainer">
             <UserImage />
-            <UserName userNameProp={ userNameProp }/>
+            <UserName userName ={ props.userName }/>
         </div>
         <DeleteIcon />
     </div>

@@ -6,8 +6,9 @@
     margin-bottom: 5px;
     display: inline-block;
     border-radius: 5px;
+    width: 100%;
     
-    & .postText, .commentsCounter {
+    & .postText, .commentsCounter, .creationDate {
         padding: 0px 10px;
         @include mixins.postText;
     }

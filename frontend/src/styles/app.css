@@ -28,6 +28,10 @@ b {
   font-weight: normal;
 }
 
+.creationDate {
+  font-size: small;
+}
+
 form * {
   display: inline-block;
   width: 100%;
@@ -182,8 +186,9 @@ img {
   margin-bottom: 5px;
   display: inline-block;
   border-radius: 5px;
+  width: 100%;
 }
-.postCard .postText, .postCard .commentsCounter {
+.postCard .postText, .postCard .commentsCounter, .postCard .creationDate {
   padding: 0px 10px;
   margin: 5px 0px;
   display: inline-block;
