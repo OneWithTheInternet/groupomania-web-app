@@ -1,4 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
+//Importing controllers
+const usersCtrl = require('../controllers/users');
+
+//Calling controllers
+router.post('/users/signup', usersCtrl.createUser);
+router.post('/users/login', usersCtrl.loginUser);
+router.delete('/auth/users/delete-user', auth, usersCtrl.deleteUser);
 
 module.exports = router;

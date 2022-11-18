@@ -24,8 +24,8 @@ Posts
 Comments
     comment
         id
-        post Id
         user Id
+        post Id
         body Text
         createdAt
         updatedAt
@@ -34,21 +34,19 @@ Comments
 
 ### Endpoints
 
-POST  v1/api/signup                   <!-- creates new user  username | email, name, password | -->
-POST v1/api/login                     <!-- logs user into their account | email, password -->
-DELETE v1/api/users/:userId           <!-- deletes user | user id -->
+POST  v1/api/users/signup                   <!-- creates new user  username | "post" object with fields "email" and "name" and "password" | -->*
+POST v1/api/users/login                     <!-- logs user into their account | "post" object with fields "email" and "password" --> *
+DELETE v1/api/auth/users/:_id               <!-- deletes user | token -->*
 
+GET v1/api/posts                            <!-- Returns all posts in the database -->*
+GET v1/api/posts?page=3                     <!-- Returns third page of posts in the database -->*
+POST v1/api/auth/posts                      <!-- creates a post | token, "post" object with fields "altText" and "bodyText", image field containing a file -->*
+GET v1/api/posts/:_id                       <!-- returns specified post | "post" object with fields "userId" and "postId" -->*
+DELETE /api/auth/posts/:id                  <!-- deletes post from database | "post" object with fields "user_id", post ID as URL param-->*
 
-GET v1/api/posts                      <!-- Returns all posts in the database -->
-GET v1/api/posts?page=1              <!-- Returns first page of posts in the database -->
-POST v1/api/posts                     <!-- creates a post | userId, body text, image url -->
-GET v1/api/posts/:postId              <!-- returns specified post | userId, postId -->
-GET v1/api/posts/:postId/comments     <!-- Returns all comments for a specified post -->
-DELETE /api/posts/:id               <!-- deltes post from database | userId, postId -->
-
-
-POST /api/comments                  <!-- creates a new comment | userId, body text, postId -->
-DELETE /api/comments/:id            <!-- deletes comment | userId, commentId -->
+POST api/auth/posts/:_id/comments           <!-- creates a new comment | token, "post" object with a "bodyText", post ID as url param -->*
+GET api/posts/:post/comments                <!-- Returns all comments for a specified post -->
+DELETE /api/auth/comments/:_id              <!-- deletes comment | token, "post" object with fields "commentId" -->
     
 
 

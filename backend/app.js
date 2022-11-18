@@ -3,11 +3,12 @@ const app = express();
 app.use(express.json());
 require('dotenv').config();
 const dbConnect = require('./config/database')
+const path = require('path');
 
 //importing routes
+const usersRoutes = require('./routes/users');
 const postsRoutes = require('./routes/posts');
 const commentsRoutes = require('./routes/comments');
-const usersRoutes = require('./routes/users');
 
 //Current version of the API
 const APIVersion = "v1";
@@ -34,8 +35,9 @@ app.use((req, res, next) => {
 });
 
 //Adding routes
-app.use("/" + APIVersion + '/api/auth', postsRoutes);
-app.use("/" + APIVersion + '/api/auth', postsRoutes);
-app.use("/" + APIVersion + '/api/auth', postsRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images'))); //Asking app to serve image folder
+app.use("/" + APIVersion + '/api', usersRoutes);
+app.use("/" + APIVersion + '/api', postsRoutes);
+app.use("/" + APIVersion + '/api', commentsRoutes);
 
 module.exports = app;
