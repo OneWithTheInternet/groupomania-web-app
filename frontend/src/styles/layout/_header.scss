@@ -45,7 +45,7 @@
         background-color: variables.$bgColor1;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         right: 0;
-        top: 125%;
+        top: 80%;
         padding: 15px 20px;
         margin-top: 0px;
         list-style-type: none;
@@ -63,7 +63,7 @@
     }
 }
 
-//selecting the dropdown menu when the dropdown element that contains it is clicked over
+//selecting the dropdown menu when the dropdown element that contains it is clicked on
 .dropdown:hover .dropdown__menu {
     display: flex;
     flex-flow: row wrap;

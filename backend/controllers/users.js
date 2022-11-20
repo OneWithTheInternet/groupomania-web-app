@@ -52,14 +52,14 @@ exports.createUser = (request, response, next) => {
 
                 //catching databse request errors
                 .catch((error) => {
-                    response.status(400).json({message: error});
+                    response.status(400).json(error);
                     console.log("Something went wrong: " + error)
                 })
             })
             
         //catching request errors 
         } catch (error) {
-            response.status(400).json({message: error});
+            response.status(400).json(error);
             console.log("Something went wrong: " + error)
         }
     }

@@ -56,6 +56,13 @@ form .errorMessage {
   margin: 10px 0px;
 }
 
+form .confirmationMessage {
+  color: green;
+  background-color: rgb(205, 241, 205);
+  margin: 10px 0px;
+  padding: 5px;
+}
+
 img {
   width: 100%;
   margin: 5px 0px;
@@ -137,7 +144,7 @@ img {
   background-color: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   right: 0;
-  top: 125%;
+  top: 80%;
   padding: 15px 20px;
   margin-top: 0px;
   list-style-type: none;

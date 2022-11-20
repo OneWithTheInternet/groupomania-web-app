@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import UserImage from "../atoms/UserImage";
 import {Link} from 'react-router-dom';
+import UserName from '../atoms/UserName';
 
 function UserMenu(props) {
 
@@ -10,6 +11,7 @@ function UserMenu(props) {
         
     return <div className='userMenu'>
 
+        <UserName />
         <UserImage />
 
         <div className='dropdown'>

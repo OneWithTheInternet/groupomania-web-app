@@ -1,0 +1,7 @@
+@use '../../styles/abstracts/variables';
+
+.confirmationMessage {
+    color: variables.$errorColor--bright;
+    margin: 10px 0px;
+    text-align: center;
+}

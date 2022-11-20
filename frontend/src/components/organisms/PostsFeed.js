@@ -11,8 +11,6 @@ function NewPostsSection() {
   const [errorMessage, setErrorMessage] = useState('');
   const [data, setData] = useState([]);
 
-  //console.log('data');
-
   //Setting up effect that makes API request when page loads
   useEffect(() => {
     /**
@@ -22,7 +20,7 @@ function NewPostsSection() {
     async function displayAll() {
       try {
         //making api request
-        const responseData = await makeRequest.posts.get();
+        const responseData = await makeRequest.posts.displayAll();
 
         //If there are no errors in the reaquest set the pass the retreived data
         if (!responseData.error) {
@@ -33,7 +31,7 @@ function NewPostsSection() {
           setErrorMessage(responseData.error)
         }
       } catch (error) {
-        setErrorMessage('function not working')
+        setErrorMessage('Something went wrong')
       }
     }
 
