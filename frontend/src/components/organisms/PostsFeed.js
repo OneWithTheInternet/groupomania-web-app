@@ -1,22 +1,24 @@
 import {useEffect, useState} from 'react'
+import { Navigate } from 'react-router-dom';
 import PostCard from "./PostCard"
 import makeRequest from "../../api"
-import ErrorMessage from '../atoms/ErrorMessage';
+import ErrorMessage from '../atoms/ErrorMessage'
 
 
 
 function NewPostsSection() {
   
+  //State variables to handle errors
   const [isRequestBad, setIsRequestBad] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isTokenValid, setIsTokenValid] = useState(true);
+  //State variable to store server's response data
   const [data, setData] = useState([]);
 
-  //Setting up effect that makes API request when page loads
+  /**
+   * Fetches data to be displayed
+   */
   useEffect(() => {
-    /**
-     * 
-     * @returns data for every post from the api request
-     */
     async function displayAll() {
       try {
         //making api request
@@ -25,35 +27,38 @@ function NewPostsSection() {
         //If there are no errors in the reaquest set the pass the retreived data
         if (!responseData.error) {
           setData(responseData);
+          
           //Handling request errors and returning error message
         } else {
           setIsRequestBad(true);
-          setErrorMessage(responseData.error)
+          setIsTokenValid(false);
+          setErrorMessage(responseData.error);
+          localStorage.clear()
         }
       } catch (error) {
-        setErrorMessage('Something went wrong')
+        setErrorMessage(error)
       }
     }
 
     //Calling function
     displayAll()
 
-    const clearStates = () => {
+    //Clearing states
+    return function cleanup() {
+      setIsTokenValid(true);
       setIsRequestBad(false);
       setErrorMessage('')
-    };
-
-    //Clearing states
-    return clearStates
+    }
   }, []);
 
-  
   //returning JSX components
   return <section className="postsFeed" >
 
     {  isRequestBad ? 
     <ErrorMessage error= {errorMessage}/> : 
     <PostCard data = { data } />}
+
+    { isTokenValid  ? null : <Navigate to='/login' /> }
   </section>
 }
 

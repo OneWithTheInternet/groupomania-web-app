@@ -36,6 +36,7 @@ Comments
 
 POST  v1/api/users/signup                   <!-- creates new user  username | "post" object with fields "email" and "name" and "password" | -->*
 POST v1/api/users/login                     <!-- logs user into their account | "post" object with fields "email" and "password" --> *
+GET v1/api/users/:id                        <!-- Returns info about a single user -->
 DELETE v1/api/auth/users/:_id               <!-- deletes user | token -->*
 
 GET v1/api/posts                            <!-- Returns all posts in the database -->*

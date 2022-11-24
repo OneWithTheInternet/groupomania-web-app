@@ -1,5 +1,6 @@
 const express = require('express');
 const Comment = require('../models/Comment');
+const User = require('../models/User');
 
 
 /**
@@ -22,10 +23,10 @@ exports.createComment = (request, response, next) => {
     let errors = [];
     
     if( !user_id || user_id == null) {
-        errors.push({ message: 'Please specify a user'})
+        errors.push({ error: 'Please specify a user'})
     }
     if( !bodyText || bodyText == null ) {
-        errors.push({ message: 'Please add text'})
+        errors.push({ error: 'Please add text'})
     } 
     if(errors.length > 0) {
         return response.status(400).json(errors)
@@ -47,14 +48,12 @@ exports.createComment = (request, response, next) => {
 
             //Catching sql query errors
             .catch((error) => {
-                response.status(400).json({message: error});
-                console.log("Something went wrong: " + error)
+                response.status(400).json(error);
             })
             
          //Catching request errors
         } catch (error) {
-            response.status(400).json({message: error});
-            console.log("Something went wrong: " + error)
+            response.status(400).json(error);
         }
     }
 }
@@ -76,25 +75,26 @@ exports.displayPostComments = (request, response, next) => {
     try {
         //finding Comments that match post ID in the database and returning first 10 organized by upload date
         Comment.findAll({
-            where: { post_id: request.params._id },
+            where: { post_id: request.params.post_id },
             offset: pageOffset, 
             limit: 10,
-            order : [['updatedAt', 'DESC']]
+            order : [['updatedAt', 'DESC']],
+            include: [{
+                model: User,
+                attributes: ['userName']
+            }]
         })
         
         //sending back response
         .then((posts) => {
             response.json(posts);
-            console.log('request successful')
         })
         
         .catch((error) => {
-            response.status(400).json({message: error});
-            console.log("Something went wrong: " + error)
+            response.status(400).json(error);
         })    
     } catch (error) {
-        response.status(400).json({message: error});
-        console.log("Something went wrong: " + error)
+        response.status(400).json(error);
     }
 }
 
@@ -115,38 +115,36 @@ exports.deleteComment = (request, response, next) => {
             //Checking comment exists in database
             if (!comment || comment == null) {
                 return response.status(404).json({
-                    message: 'Resource not found'
+                    error: 'Resource not found'
                 });
             }
 
             //Cheking user is authorized to delete comment by matching his ID to the post owner's ID
             if (comment.user_id !== request.auth.user_id) {
                 return response.status(401).json({
-                    message: 'Request not authorized'
+                    error: 'Request not authorized'
                 });
             }
 
             //Deleting comment in database
             comment.destroy()
             .then (() => {
-                response.status(200).json({message: "comment deleted sucessfully"})
+                response.status(200).json({ message: "comment deleted sucessfully" })
             })
 
             .catch ((error) => {
-                response.status(400).json({message: error});
+                response.status(400).json(error);
 
             })
         })
         
         //Catching database query errors
         .catch((error) => {
-            response.status(400).json({message: error});
-            console.log("Something went wrong: " + error)  
+            response.status(400).json(error);
         })
         
      //Catching request errors   
     } catch (error) {
-        response.status(400).json({message: error});
-        console.log("Something went wrong: " + error)  
+        response.status(400).json(error);
     }
 }

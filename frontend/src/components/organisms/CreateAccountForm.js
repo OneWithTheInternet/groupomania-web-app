@@ -8,14 +8,13 @@ import { Link } from "react-router-dom";
 function CreateAccountForm() {
     //Creating state variable for errors
     const [errorMessage, setErrorMessage] = useState('');
-    //Creating state variable to store response from API request 
+    //Creating state variables to store response from API request 
     const [data, setData] = useState('');
     const [isUserCreated, setIsUserCreated] = useState(false);
     //Using useState to store user's input in as variables
     const [userNameValue, setUserNameValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
-    //Object to be submitted as API request data
     const userInput = {
         user: {
             userName: userNameValue,
@@ -25,45 +24,42 @@ function CreateAccountForm() {
     }
 
     /**
-     * Adds user to the database
+     * Adds new user to database
+     * @param {logs information about the user triggered event} event 
      */
-     async function createUser() {
+     async function createUser(event) {
+        //Prevent page from reloading when clicking submit
+        event.preventDefault()
+        
         try {
             //making api request
             const responseData = await makeRequest.users.createUser(userInput);
 
             //If there are no errors in the reaquest set the "data" state to the retreived data
-            if (!responseData.error) {
-            setData(responseData[0].message);
+            if (!responseData.error || !responseData.errors) {
+            setData(responseData.message);
             setIsUserCreated(true);
             setErrorMessage('')
 
             //Handling request errors and returning error message
             } else {
-            setErrorMessage(responseData.error.errors[0].message);
+                if(responseData.error) {
+                    setErrorMessage(responseData.error)
+                }
+                
+                if (responseData.errors){
+                    setErrorMessage(responseData.errors[0].message)
+                }
             }
 
         } catch (error) {
-            setErrorMessage('Something went wrong ' + error);
+            setErrorMessage(error.error);
         }
-    }
-
-    /**
-     * Function handles what happens when user submits form
-     * @param {logs information about the user triggered event} event 
-     */
-     function handleSubmit(event) {
-    
-        //Prevent page from reloading when clicking submit
-        event.preventDefault()
-        
-        //Making request
-        createUser()
     }
     
     
     return (
-        <form className="createAccount__form" onSubmit={(event) => {handleSubmit(event)}}>
+        <form className="createAccount__form" onSubmit={(event) => {createUser(event)}}>
             
             {/* render form content only if user has not been created */}
             {isUserCreated === false ? 
@@ -121,7 +117,3 @@ function CreateAccountForm() {
 }
 
 export default CreateAccountForm
-
-
-
-//onSubmit={(event) => event.preventDefault}

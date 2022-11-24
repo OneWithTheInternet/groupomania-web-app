@@ -1,5 +1,7 @@
 const express = require('express');
 const Post = require('../models/Post');
+const User = require('../models/User');
+const Comment = require('../models/Comment');
 //fs (file system) gives you access to functions that allow you to modify the file system, in this case, deleting fotos.
 const fs = require('fs');
 
@@ -22,22 +24,26 @@ exports.displayAllPosts = (request, response, next) => {
         Post.findAll( {
             offset: pageOffset, 
             limit: 10,
-            order : [['updatedAt', 'DESC']]
+            order : [['updatedAt', 'DESC']],
+            raw: true,
+            include: [
+                {
+                    model: User,
+                    attributes: ['userName']
+                }
+            ]
         } )
         
-        //sending back response
-        .then((posts) => {
-            response.json(posts);
-            console.log('request successful')
+        .then((posts) => {            
+            //sending back response
+            return response.status(200).json(posts);
         })
         
         .catch((error) => {
-            response.status(400).json({message: error});
-            console.log("Something went wrong: " + error)
+            response.status(400).json(error);
         })    
     } catch (error) {
-        response.status(400).json({message: error});
-        console.log("Something went wrong: " + error)
+        response.status(400).json(error);
     }
 }
 
@@ -64,10 +70,10 @@ exports.createPost = (request, response, next) => {
 
     //user_id variable comes from auth middleware
     if(!request.auth.user_id || request.auth.user_id == null) {
-        errors.push({ message: 'Please specify a user'})
+        errors.push({ error: 'Please specify a user'})
     }
     if(!image_url && !bodyText || image_url == null && bodyText == null || !image_url && bodyText == null || image_url == null && !bodyText ) {
-        errors.push({ message: 'Please add an image or text'})
+        errors.push({ error: 'Please add an image or text'})
     } 
     if(errors.length > 0) {
         return response.status(400).json(errors)
@@ -90,13 +96,11 @@ exports.createPost = (request, response, next) => {
                 response.status(201).json([{message: 'post created successfully'}])
             })
             .catch((error) => {
-                response.status(400).json({message: error});
-                console.log("Something went wrong: " + error)
+                response.status(400).json(error);
             })
         
         } catch (error) {
-            response.status(400).json({message: error});
-            console.log("Something went wrong: " + error)
+            response.status(400).json(error);
         }
     }
 }
@@ -115,22 +119,22 @@ exports.displayPost = (request, response, next) => {
         
         //Sending 'post' object data as response
         .then((post) => {
-            //response if there where no results
-            if (post == null) {
-                response.status(404).json({message: "Resource not found"})
+
+            if (post !== null) {
+                //response if resource instance was found
+                response.json(post)
             }
-            //response if resource instance was found
-            response.json(post)
-            console.log('request successful')
+
+            else {
+                //response if there where no results
+                response.status(404).json({error: "Resource not found"})
+            }
         })
-        
         .catch((error) => {
-            response.status(400).json({message: error});
-            console.log("Something went wrong: " + error)
+            response.status(400).json(error);
         })  
     } catch (error) {
-        response.status(400).json({message: error});
-        console.log("Something went wrong: " + error)
+        response.status(400).json(error);
     }
 }
 
@@ -152,14 +156,14 @@ exports.deletePost = (request, response, next) => {
             //Checking post exists in database
             if (!post || post == null) {
                 return response.status(404).json({
-                    message: 'Resource not found'
+                    error: 'Resource not found'
                 });
             }
 
             //Cheking user is authorized to delete post by mathing his ID to the post owner's ID
             if (post.user_id !== request.auth.user_id) {
                 return response.status(401).json({
-                    message: 'Request not authorized'
+                    error: 'Request not authorized'
                 });
             }
 
@@ -172,9 +176,8 @@ exports.deletePost = (request, response, next) => {
             if (filename !== null) {
                 fs.unlink('images/' + filename, (error) => {
                     if (error) {
-                        return response.status(500).json({message: error});
+                        return response.status(500).json(error);
                     } 
-                    console.log('file deleted sucessfuly');
                 });
             }
 
@@ -185,20 +188,19 @@ exports.deletePost = (request, response, next) => {
             })
 
             .catch ((error) => {
-                response.status(400).json({message: error});
+                response.status(400).json(error);
 
             })
         })
         
         //Catching database query errors
         .catch((error) => {
-            response.status(400).json({message: error});
-            console.log("Something went wrong: " + error)  
+            response.status(400).json(error);
         })
         
      //Catching request errors   
     } catch (error) {
-        response.status(400).json({message: error});
+        response.status(400).json(error);
         console.log("Something went wrong: " + error)  
     }
 }
@@ -216,11 +218,11 @@ exports.deletePost = (request, response, next) => {
         })
         
         .catch((error) => {
-            response.status(400).json({message: error});
+            response.status(400).json(error);
             console.log("Something went wrong: " + error)  
         })
     } catch (error) {
-        response.status(400).json({message: error});
+        response.status(400).json(error);
         console.log("Something went wrong: " + error)  
     }
 } */

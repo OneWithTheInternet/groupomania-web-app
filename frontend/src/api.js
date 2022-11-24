@@ -2,7 +2,7 @@
 const apiUrl = 'http://localhost:3000/v1/api';
 
 /**
- *  AJAX request that returns a promise with the JSON file.
+ * AJAX request that returns a promise with the JSON file.
  * Works for all requests by changing arguments.
  * @param {*} api 
  * @param {*} verb 
@@ -12,17 +12,21 @@ const makeRequest = {
     posts: {
         displayAll: async () => {
             try {
-                const requestResponse = await fetch(apiUrl + '/posts', { method: 'GET' });
+                const requestResponse = await fetch(apiUrl + '/posts', { 
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    } 
+                });
 
                 //Returning data in JSON format if request is successful
                 if (requestResponse.ok) {
-                    const responseData = await requestResponse.json();
-                    return responseData
+                    return await requestResponse.json()
                     
                     //Cheking for errors
                 } else {
-                    const error = { "error" : await requestResponse.json() }
-                    return error;
+                    return await requestResponse.json()
                 }
 
             } catch (error) {
@@ -43,17 +47,88 @@ const makeRequest = {
 
                 //Returning data in JSON format if request is successful
                 if (requestResponse.ok) {
-                    const responseData = await requestResponse.json();
-                    return responseData
+                    return await requestResponse.json()
                     
                     //Cheking for errors
                 } else {
-                    const error = { "error" : await requestResponse.json() };
-                    return error;
+                    return await requestResponse.json()
                 }
 
             } catch (error) {
                 return error
+            }
+        },
+
+        loginUser: async (userInput) => {
+            try {
+                const requestResponse = await fetch(apiUrl + '/users/login', { 
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(userInput)
+                });
+
+                //Returning data in JSON format if request is successful
+                if (requestResponse.ok) {
+                    return await requestResponse.json()
+                    
+                    //Cheking for errors
+                } else {
+                    return await requestResponse.json()
+                }
+
+            } catch (error) {
+                return error
+            }
+        },
+
+        displayOneUser: async (user_id) => {
+
+            try {
+                const requestResponse = await fetch(apiUrl + '/users/' + user_id, { 
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    } 
+                });
+
+                //Returning data in JSON format if request is successful
+                if (requestResponse.ok) {
+                    return await requestResponse.json()
+                    
+                    //Cheking for errors
+                } else {
+                    return await requestResponse.json()
+                }
+
+            } catch (error) {
+                return error
+            }
+        }
+    },
+
+    comments: {
+        displayPostComments: async (post_id) => {
+            try {
+                const requestResponse = await fetch(apiUrl + '/posts/' + post_id + '/comments', { 
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    } 
+                });
+
+                //Returning data in JSON format if request is successful
+                if (requestResponse.ok) {
+                    return await requestResponse.json()
+                    
+                    //Cheking for errors
+                } else {
+                    return await requestResponse.json()
+                }
+            } catch (error) {
+                return error 
             }
         }
     }
@@ -65,21 +140,9 @@ export default makeRequest
 
 
 
-
-
-
-
-
-
-
-
-/* const api = (apiUrl) => {
-    posts: {
-        get: (postID) => {
-            return fetch(apiUrl + `/v2/post/${postID}`)
-        }
-    }
-} */
-
-//example of how I would use this in another function
-//api.posts.get(1);
+/*
+            //Accessing the URL parameteres
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const user_id = urlParams.get('user_id');            
+*/

@@ -26,7 +26,8 @@ const User = dbConnect.define('user', {
     },
     password: {
         type: DataTypes.STRING(500),
-        allowNull: false 
+        allowNull: false,
+        unique: true
     }
 });
 

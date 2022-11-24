@@ -1,6 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
-//importing package for password validation
+//importing package for password encryption/validation
 const bcrypt = require('bcrypt');
 //importing package for token management
 const jwt = require('jsonwebtoken');
@@ -21,13 +21,13 @@ exports.createUser = (request, response, next) => {
     let errors = [];
     
     if( !email || email == null ) {
-        errors.push({ message: 'Please add an email adress'})
+        errors.push({ error: 'Please add an email adress'})
     } 
     if( !userName || userName == null ) {
-        errors.push({ message: 'Please add a user name'})
+        errors.push({ error: 'Please add a user name'})
     } 
     if( !password || password == null ) {
-        errors.push({ message: 'Please add a password'})
+        errors.push({ error: 'Please add a password'})
     } 
     if(errors.length > 0) {
         return response.status(400).json(errors)
@@ -47,20 +47,18 @@ exports.createUser = (request, response, next) => {
                 
                 //Sending back response
                 .then(() => {
-                    response.status(201).json([{message: 'user created successfully'}])
+                    response.status(201).json({message: 'user created successfully'})
                 })
 
                 //catching databse request errors
                 .catch((error) => {
                     response.status(400).json(error);
-                    console.log("Something went wrong: " + error)
                 })
             })
             
         //catching request errors 
         } catch (error) {
             response.status(400).json(error);
-            console.log("Something went wrong: " + error)
         }
     }
 }
@@ -82,10 +80,10 @@ exports.loginUser = (request, response, next) => {
     let errors = [];
     
     if( !email || email == null ) {
-        errors.push({ message: 'Please add an email adress'})
+        errors.push({ error: 'Please add an email adress'})
     } 
     if( !password || password == null ) {
-        errors.push({ message: 'Please add a password'})
+        errors.push({ error: 'Please add a password'})
     } 
     if(errors.length > 0) {
         return response.status(400).json(errors)
@@ -99,8 +97,7 @@ exports.loginUser = (request, response, next) => {
             .then((user) => {
                 //response if there where no results
                 if (user == null || !user) {
-                    console.log('User not found');
-                    return response.status(401).json({ message: 'User not found!' })
+                    return response.status(401).json({ error: 'User not found!' })
                 }
 
                 //Cheking password validity using bcrypt package
@@ -110,7 +107,7 @@ exports.loginUser = (request, response, next) => {
                     //sending response
                     if (!valid || valid == false) {
                         console.log(user);
-                        return response.status(401).json({ message: 'Incorrect password'});
+                        return response.status(401).json({ error: 'Incorrect user or password'});
                     }
                     
                     //Creating a token
@@ -126,26 +123,51 @@ exports.loginUser = (request, response, next) => {
                     })
                 })
                 
-                //Catching bycrypt request errors
+                //Catching bcrypt request errors
                 .catch(
                     (error) => {
-                    return response.status(401).json({ message: error });
+                    return response.status(401).json(error);
                     }
                 );
             })
             
             //Catching database request errors
             .catch((error) => {
-                response.status(500).json({message: error});
-                console.log("Something went wrong: " + error)
+                response.status(500).json(error);
             })
             
             //Catching request errors
         } catch (error) {
-            response.status(400).json({message: error});
-            console.log("Something went wrong: " + error)
+            response.status(400).json(error);
         }       
     }
+}
+
+exports.displayOneUser = (request, response, next) => {
+    console.log(request.params.user_id);
+    
+    try {
+        //Finding specified object in the database
+        User.findOne({ where: { user_id: request.params.user_id } })
+        //Sending 'user' object data as response
+        .then((user) => {
+            //Checking user exists in database
+            if (user !== null) {
+                return response.status(200).json(user)
+            } else {
+                //response if there where no results
+                return response.status(404).json({ error: 'User not found!' })
+            }
+        })
+        //Catching database request errors
+        .catch((error) => {
+            response.status(500).json(error);
+        })       
+        //Catching request errors
+    } catch (error) {
+        response.status(400).json(error);
+    }       
+    
 }
 
 
@@ -167,7 +189,7 @@ exports.deleteUser = (request, response, next) => {
             //Checking user exists in database
             if (!user || user == null) {
                 return response.status(404).json({
-                    message: 'Resource not found'
+                    error: 'Resource not found'
                 });
             }
 
@@ -179,21 +201,19 @@ exports.deleteUser = (request, response, next) => {
             })
 
             .catch ((error) => {
-                response.status(400).json({message: error});
+                response.status(400).json(error);
 
             })
         })
         
         //Catching database query errors
         .catch((error) => {
-            response.status(400).json({message: error});
-            console.log("Something went wrong: " + error)  
+            response.status(400).json(error);
         })
         
      //Catching request errors   
     } catch (error) {
-        response.status(400).json({message: error});
-        console.log("Something went wrong: " + error)  
+        response.status(400).json(error);
     }
 
 }

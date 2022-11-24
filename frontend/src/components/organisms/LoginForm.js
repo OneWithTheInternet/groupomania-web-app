@@ -1,32 +1,55 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Navigate } from 'react-router-dom';
+import makeRequest from "../../api";
 import SubmitButton from "../atoms/SubmitButton";
+import ErrorMessage from "../atoms/ErrorMessage";
 
 function LoginForm() {
     //Creating useState to store user's input in as variables
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
     //Object to be submitted as API request data
-    const userLoginInfo = {
-        email: emailValue,
-        password: passwordValue
+    const userInput = {
+        user: {
+            email: emailValue,
+            password: passwordValue
+        }
     }
+    //State to check errors
+    const [error, setError] = useState('');
+    //Stete to check for login 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     /**
      * Function handles what happens when user submits form
      * @param {logs information about the user triggered event} event 
      */
-    function handleSubmit(event) {
-        //creating an object from user input to send to server
-        console.log(userLoginInfo);
+     async function login(event) {
         //Prevent page from reloading when clicking submit
-        event.preventDefault()    
-        //Make API request next
+        event.preventDefault();    
+       
+        try {
+            //Make API request next
+            const responseData = await makeRequest.users.loginUser(userInput);
+            //Setting token to local storage
+            if (!responseData.error) {
+                localStorage.setItem("user_id", responseData.user_id);
+                localStorage.setItem("token", responseData.token);
+                setIsLoggedIn(true);
+                return setError('');
+            } else {
+                setError(responseData.error);
+                setIsLoggedIn(false);
+            }
+        } catch (error) {
+            setError(error)
+            setIsLoggedIn(false);
+        }
     }
     
     return (
-        <form className="login__form" onSubmit={(event) => {handleSubmit(event)}}>
-            <div className="errorMessage"></div>        
+        <form className="login__form" onSubmit={(event) => {login(event)}}>
         
             <label>email
                 <input 
@@ -52,6 +75,11 @@ function LoginForm() {
             </label>
 
             <SubmitButton />
+
+            { error === '' ? null : <ErrorMessage error= {error}/> } 
+            
+            { isLoggedIn == true ? <Navigate to='/' replace/> : null }
+
         </form>
     )
 }
