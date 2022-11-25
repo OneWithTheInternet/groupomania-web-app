@@ -27,16 +27,18 @@
 .userMenu {
     display: flex;
     flex-flow: row wrap;
+    align-content: center;
+
+    .userTag__userContainer__nameContainer {
+        color: grey;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
 }
 
 .dropdown {
     position: relative;
     z-index: 10;
-
-
-    &__arrowContainer {
-        
-    }
 
     &__menu {
         display: none;

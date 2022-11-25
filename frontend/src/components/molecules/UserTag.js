@@ -9,9 +9,9 @@ function UserTag(props) {
     return <div className="userTag">
         <div className="userTag__userContainer">
             <UserImage />
-            <UserName userName ={ props.userName }/>
+            <UserName userName = { props.userName }/>
         </div>
-        <DeleteIcon />
+        <DeleteIcon user_id = { props.user_id } post_id = { props.post_id } />
     </div>
 }
 

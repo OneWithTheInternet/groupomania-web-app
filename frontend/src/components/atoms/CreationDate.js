@@ -4,7 +4,7 @@ function CreationDate(props) {
   return (
     <div className="creationDate">
       <b>
-        posted on 
+        Posted on 
         {" "}
         { props.createdAt.split("T")[0] } 
         {" "}

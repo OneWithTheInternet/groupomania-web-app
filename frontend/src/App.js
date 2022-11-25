@@ -22,7 +22,7 @@ function App() {
             <Route path="/createaccount" element={<CreateAccount />} />
             <Route path="/" element={<Home />} />
             <Route path='/createpost' element={<CreatePost />} />
-            <Route path='/post/:id' element={<Post />} />
+            <Route path='/posts/:post_id' element={<Post />} />
             <Route path='/account-settings' element={<AccountSettings />} />
           </Routes>
       </div>

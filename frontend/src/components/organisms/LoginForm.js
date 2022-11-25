@@ -17,7 +17,7 @@ function LoginForm() {
         }
     }
     //State to check errors
-    const [error, setError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     //Stete to check for login 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -37,13 +37,13 @@ function LoginForm() {
                 localStorage.setItem("user_id", responseData.user_id);
                 localStorage.setItem("token", responseData.token);
                 setIsLoggedIn(true);
-                return setError('');
+                return setErrorMessage('');
             } else {
-                setError(responseData.error);
+                setErrorMessage(responseData.error);
                 setIsLoggedIn(false);
             }
         } catch (error) {
-            setError(error)
+            setErrorMessage(error)
             setIsLoggedIn(false);
         }
     }
@@ -76,7 +76,7 @@ function LoginForm() {
 
             <SubmitButton />
 
-            { error === '' ? null : <ErrorMessage error= {error}/> } 
+            { errorMessage === '' ? null : <ErrorMessage error= {errorMessage}/> } 
             
             { isLoggedIn == true ? <Navigate to='/' replace/> : null }
 

@@ -148,7 +148,7 @@ exports.displayPost = (request, response, next) => {
 exports.deletePost = (request, response, next) => {
     try {     
         //Finding specified instance in the database
-        Post.findOne({ where: { post_id: request.params._id } })
+        Post.findOne({ where: { post_id: request.params.post_id } })
         
         //destroying post
         .then((post) => {
@@ -196,6 +196,7 @@ exports.deletePost = (request, response, next) => {
         //Catching database query errors
         .catch((error) => {
             response.status(400).json(error);
+            console.log("Something went wrong: " + error)  
         })
         
      //Catching request errors   
@@ -206,23 +207,41 @@ exports.deletePost = (request, response, next) => {
 }
 
 /**
- * Displays all comments related to a post
+ * Finds in the database all instances of the specified resouce and sends them back to the client
+ * Uses the sequalize model to manage database
+ * @param {data recieved from client} request 
+ * @param {data sent back to client} response 
+ * @param {express method. calls next middleware} next 
  */
-/* exports.displayPostComments = (request, response, next) => {
+ exports.displayPostComments = (request, response, next) => {
+
+    //pagination aid varialbes. if there is a "page" query string, we substract 1 and multiply it by 10. Thats the amount of offset we need
+    const index = request.query.page ? request.query.page - 1 : 0;
+    const pageOffset = request.query.page ? 10 * index : 0;
+    console.log(index, pageOffset);
+
     try {
-        //Finding specified object in the database
-        Comment.findOne({ where: { post_id: request.params._id } })
+        //finding Comments that match post ID in the database and returning first 10 organized by upload date
+        Comment.findAll({
+            where: { post_id: request.params.post_id },
+            offset: pageOffset, 
+            limit: 10,
+            order : [['updatedAt', 'DESC']],
+            include: [{
+                model: User,
+                attributes: ['userName']
+            }]
+        })
         
-        .then((post) => {
-            response.status(200).json(post)
+        //sending back response
+        .then((posts) => {
+            response.json(posts);
         })
         
         .catch((error) => {
             response.status(400).json(error);
-            console.log("Something went wrong: " + error)  
-        })
+        })    
     } catch (error) {
         response.status(400).json(error);
-        console.log("Something went wrong: " + error)  
     }
-} */
+}

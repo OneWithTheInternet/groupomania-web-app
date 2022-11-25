@@ -51,18 +51,6 @@ textarea {
   resize: none;
 }
 
-form .errorMessage {
-  color: red;
-  margin: 10px 0px;
-}
-
-form .confirmationMessage {
-  color: green;
-  background-color: rgb(205, 241, 205);
-  margin: 10px 0px;
-  padding: 5px;
-}
-
 img {
   width: 100%;
   margin: 5px 0px;
@@ -131,6 +119,12 @@ img {
 .userMenu {
   display: flex;
   flex-flow: row wrap;
+  align-content: center;
+}
+.userMenu .userTag__userContainer__nameContainer {
+  color: grey;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .dropdown {
@@ -230,7 +224,14 @@ img {
   align-items: baseline;
 }
 .userTag__userContainer__nameContainer {
-  margin-left: 10px;
+  margin: 0px 10px;
+}
+
+.comment {
+  padding: 10px;
+  margin: 5px 0px;
+  margin-bottom: 15px;
+  border-left: solid lightgray 4px;
 }
 
 .commentsCounter {
@@ -239,11 +240,16 @@ img {
   margin: 5px 0px;
 }
 
-.comment {
-  padding: 10px;
-  margin: 5px 0px;
-  margin-bottom: 15px;
-  border-left: solid lightgray 4px;
+.confirmationMessage {
+  color: green;
+  background-color: rgb(145, 231, 151);
+  margin: 10px 0px;
+  padding: 5px;
+}
+
+.errorMessage {
+  color: red;
+  margin: 10px 0px;
 }
 
 body {

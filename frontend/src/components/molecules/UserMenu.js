@@ -2,18 +2,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import UserImage from "../atoms/UserImage";
 import {Link} from 'react-router-dom';
-import UserName from '../atoms/UserName';
+import CurrentUserName from '../atoms/CurrentUserName';
+import { Navigate } from 'react-router-dom';
+import { useState } from 'react';
+
 
 function UserMenu(props) {
 
-    /* //Accessing the useState modifying fuction through the context hook
-    const signOut = useContext(loggedInContext); */
-        
+    /**
+     * Logs user out of by clearing the login credentials in "local storage"
+     */
+    function logout() {
+        try {
+            localStorage.clear("user_id", "token");
+        } catch (error) {
+            return console.log(error);          
+        }
+    }
+
+
     return <div className='userMenu'>
 
-        <UserName />
+        <CurrentUserName />
         <UserImage />
-
+        
         <div className='dropdown'>
             <div className='dropdown__arrowContainer'>
                 <FontAwesomeIcon className="icon2" icon={faAngleDown} />
@@ -22,7 +34,11 @@ function UserMenu(props) {
             <ul className='dropdown__menu'>
                 <li><strong>Current user's name</strong></li>
                 <li><Link to='/account-settings'>Account settings</Link></li>
-                <li><Link to='/login'>Sign Out</Link></li>
+                <li onClick={ () => { logout() } } >
+                    <Link to='/login'>
+                        Sign Out
+                    </Link>
+                </li>
             </ul>
         </div>
     </div>

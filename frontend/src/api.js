@@ -32,6 +32,31 @@ const makeRequest = {
             } catch (error) {
                 return error
             }
+        },
+
+        deletePost: async (post_id) => {
+            
+            try {
+                const requestResponse = await fetch(apiUrl + '/auth/posts/' + post_id, { 
+                    method: 'DELETE',
+                    mode: 'cors',
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    } 
+                });
+
+                //Returning data in JSON format if request is successful
+                if (requestResponse.ok) {
+                    return await requestResponse.json()
+                    
+                    //Cheking for errors
+                } else {
+                    return await requestResponse.json()
+                }
+
+            } catch (error) {
+                return error
+            }  
         }
     },
 
@@ -105,6 +130,31 @@ const makeRequest = {
             } catch (error) {
                 return error
             }
+        },
+        
+        deleteUser: async () => {
+
+            try {
+                const requestResponse = await fetch(apiUrl + '/users/delete-user', { 
+                    method: 'DELETE',
+                    mode: 'cors',
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    } 
+                });
+
+                //Returning data in JSON format if request is successful
+                if (requestResponse.ok) {
+                    return await requestResponse.json()
+                    
+                    //Cheking for errors
+                } else {
+                    return await requestResponse.json()
+                }
+
+            } catch (error) {
+                return error
+            }  
         }
     },
 

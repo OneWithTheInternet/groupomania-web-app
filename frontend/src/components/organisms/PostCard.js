@@ -3,7 +3,7 @@ import PostText from "../atoms/PostText";
 import CommentsCounter from "../molecules/CommentsCounter";
 import UserTag from "../molecules/UserTag";
 import {Link} from 'react-router-dom';
-import CreationDate from "../molecules/CreationDate";
+import CreationDate from "../atoms/CreationDate";
 
 function PostCard(props) {
 
@@ -12,9 +12,9 @@ function PostCard(props) {
         //addding an article DOM element with envent handler
        <article className="postCard" key={ post.post_id }>
 
-            <Link to='post/:id'>
+            <UserTag userName = { post["user.userName"] } user_id = {post.user_id} post_id = {post.post_id} />
 
-                <UserTag userName = { post["user.userName"] } />
+            <Link to={'posts/' + post.post_id}>
                 
                 <CreationDate createdAt = { post.createdAt } />
                 

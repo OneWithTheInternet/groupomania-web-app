@@ -6,11 +6,13 @@ import ConfirmationMessage from "../atoms/ConfirmationMessage";
 import { Link } from "react-router-dom";
 
 function CreateAccountForm() {
-    //Creating state variable for errors
+    //error state
     const [errorMessage, setErrorMessage] = useState('');
+    //request state
+    const [isRequestDone, setIsRequestDone] = useState(false);
+    const [isRequestBad, setIsRequestBad] = useState(false);
     //Creating state variables to store response from API request 
     const [data, setData] = useState('');
-    const [isUserCreated, setIsUserCreated] = useState(false);
     //Using useState to store user's input in as variables
     const [userNameValue, setUserNameValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
@@ -36,24 +38,31 @@ function CreateAccountForm() {
             const responseData = await makeRequest.users.createUser(userInput);
 
             //If there are no errors in the reaquest set the "data" state to the retreived data
-            if (!responseData.error || !responseData.errors) {
+            if ( !responseData.errors && !responseData.error) {
             setData(responseData.message);
-            setIsUserCreated(true);
-            setErrorMessage('')
+            setErrorMessage('');
+            setIsRequestDone(true);
+            setIsRequestBad(false);
 
             //Handling request errors and returning error message
             } else {
                 if(responseData.error) {
-                    setErrorMessage(responseData.error)
+                    setErrorMessage(responseData.error);
+                    setData('');
+                    setIsRequestDone(false);
+                    setIsRequestBad(true)
                 }
                 
                 if (responseData.errors){
-                    setErrorMessage(responseData.errors[0].message)
+                    setErrorMessage(responseData.errors[0].message);
+                    setData('');
+                    setIsRequestDone(false);
+                    setIsRequestBad(true)
                 }
             }
 
         } catch (error) {
-            setErrorMessage(error.error);
+            return setErrorMessage(error.error);
         }
     }
     
@@ -62,7 +71,7 @@ function CreateAccountForm() {
         <form className="createAccount__form" onSubmit={(event) => {createUser(event)}}>
             
             {/* render form content only if user has not been created */}
-            {isUserCreated === false ? 
+            {isRequestDone === false ? 
                 <div>
                     <label>User Name
                         <input 
@@ -106,11 +115,11 @@ function CreateAccountForm() {
                 : null
             }
 
-            { errorMessage === '' ? null : <ErrorMessage error= {errorMessage}/> } 
+            { isRequestBad ? <ErrorMessage error= {errorMessage}/> : null } 
 
-            { isUserCreated === false ? null : <ConfirmationMessage message= {data}/> }
+            { isRequestDone ? <ConfirmationMessage message= {data}/> : null }
             
-            { isUserCreated === false ? null : <Link to='/login'><u>log into your account</u></Link> }
+            { isRequestDone ? <Link to='/login'><u>log into your account</u></Link> : null }
 
         </form>
     )

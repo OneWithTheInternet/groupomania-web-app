@@ -7,7 +7,6 @@ import ErrorMessage from '../atoms/ErrorMessage'
 
 
 function NewPostsSection() {
-  
   //State variables to handle errors
   const [isRequestBad, setIsRequestBad] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -27,12 +26,14 @@ function NewPostsSection() {
         //If there are no errors in the reaquest set the pass the retreived data
         if (!responseData.error) {
           setData(responseData);
-          
+          setIsRequestBad(false);
+          setIsTokenValid(true);
+
           //Handling request errors and returning error message
         } else {
+          setErrorMessage(responseData.error);
           setIsRequestBad(true);
           setIsTokenValid(false);
-          setErrorMessage(responseData.error);
           localStorage.clear()
         }
       } catch (error) {

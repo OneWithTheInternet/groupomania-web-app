@@ -16,12 +16,12 @@ function CommentsCounter(props) {
         try {
             const responseData = await makeRequest.comments.displayPostComments(props.post.post_id);
             if (!responseData.error) {
+                setCommentsCount(responseData.length)
                 setIsRequestDone(true);
-                return setCommentsCount(responseData.length)
                 //handleing errors
             } else {
-                setIsRequestBad(true);
                 setErrorMessage(responseData.error)
+                setIsRequestBad(true);
             }
         } catch (error) {
             return setErrorMessage(error)

@@ -11,14 +11,18 @@ import image from '../../assets/sample-image.jpeg'
 
 function Post() {
 
+  console.log("render");
+  
+  //this component needs to make a request and that is where it's getting all its data from 
+
   return (
     <div className='sectionsContainer'>
       <section className='postContent' >
-        <UserTag userNameProp={"william"} />
+        <UserTag userName={"william"} />
 
-        <PostText textProp={'whatever'} />
+        <PostText bodyText={'whatever'} />
         
-        <img alt='text' src={image} />
+        <img altText='text' src={image} />
       </section>
 
       <section className='comments'>

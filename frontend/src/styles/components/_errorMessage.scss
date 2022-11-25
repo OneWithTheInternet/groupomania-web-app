@@ -1,7 +1,6 @@
 @use '../../styles/abstracts/variables';
 
 .errorMessage {
-    color: variables.$errorColor--bright;
+    color: red;
     margin: 10px 0px;
-    text-align: center;
 }

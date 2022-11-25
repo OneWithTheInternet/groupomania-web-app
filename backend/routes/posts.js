@@ -10,8 +10,10 @@ router.post('/auth/posts', auth, multer, postsCtrl.createPost);
 //Display all posts
 router.get('/posts', auth, postsCtrl.displayAllPosts);
 //Display one post
-router.get('/posts/:_id', auth, postsCtrl.displayPost);
+router.get('/posts/:post_id', auth, postsCtrl.displayPost);
+//Display post comments
+router.get('/posts/:post_id/comments', auth, postsCtrl.displayPostComments);
 //Delete post
-router.delete('/auth/posts/:_id', auth, postsCtrl.deletePost);
+router.delete('/auth/posts/:post_id', auth, postsCtrl.deletePost);
 
 module.exports = router;
