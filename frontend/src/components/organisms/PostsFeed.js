@@ -15,7 +15,6 @@ function NewPostsSection() {
   //Defining current page state
   const [pageNumber, setPageNumber] = useState(1);
 
-
   /**
    * Fetches data for 10 latest posts
    */
@@ -27,17 +26,21 @@ function NewPostsSection() {
       //If there are no errors in the reaquest set the pass the retreived data
       if (!responseData.error) {
         //Setting data to an array with the actual data inside. Useful for pagination and mapping later.
-        setData(() => { return [ responseData ] });
-        console.log(data);
+        setData(responseData);
         setIsRequestBad(false);
         setIsTokenValid(true);
 
-        //Handling request errors and returning error message
-      } else {
+        //Handling invalid token
+      } else if ( responseData.error === 'invalid token') {
         setErrorMessage(responseData.error);
         setIsRequestBad(true);
-        //setIsTokenValid(false);
-        //localStorage.clear()
+        setIsTokenValid(false);
+        localStorage.clear()
+
+        //handling other errors
+      } else {
+        setErrorMessage(responseData.error);
+        setIsRequestBad(true)
       }
     } catch (error) {
       setErrorMessage(error)
@@ -55,9 +58,7 @@ function NewPostsSection() {
       //If there are no errors in the reaquest set the pass the retreived data
       if (!responseData.error) {
         //setting state to previus data convined with new data
-        setData( prevData => {
-          return [ ...prevData, responseData ] 
-        });
+        setData(responseData);
         setPageNumber(pageNumber + 1);
         console.log(data);
         setIsRequestBad(false);
@@ -73,21 +74,6 @@ function NewPostsSection() {
     } catch (error) {
       setErrorMessage(error)
     }
-  }
-
-  /**
-   * Loops over arrays inside "data" creating one set of posts per array
-   * @returns a set of posts per every page requested
-   */
-  function mapPages() {
-    //Using map() method to loop over data arrays and create each set of postcards
-    let page = data.map( (array) => (
-      <PostCard data = { array } key={ array.post_id }/>
-    ));
-
-    return (
-      page
-    )
   }
 
   /**
@@ -111,9 +97,7 @@ function NewPostsSection() {
   //returning JSX components
   return <section className="postsFeed" >
 
-    { mapPages() }
-
-    {/* <PostCard data = { data } /> */}
+    <PostCard data = { data } />
 
     {  isRequestBad ? <ErrorMessage error= {errorMessage}/> : null }
 

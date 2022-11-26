@@ -4,6 +4,7 @@ const User = require('../models/User');
 const Comment = require('../models/Comment');
 //fs (file system) gives you access to functions that allow you to modify the file system, in this case, deleting fotos.
 const fs = require('fs');
+const e = require('express');
 
 /**
  * Finds in the database all instances of the specified resouce and sends them back to the client
@@ -12,14 +13,14 @@ const fs = require('fs');
 exports.displayAllPosts = (request, response, next) => {
 
     //pagination aid varialbes. if there is a "page" query string, we substract 1 and multiply it by 10. Thats the amount of offset we need
-    const index = request.query.page - 1;
-    const pageOffset = 10 * index;
+    const pageNumber = request.query.page;
+    const itemsPerPage = 10;
+    const totalRequested = itemsPerPage * pageNumber;
 
     try {
         //finding posts in the database and returning first 10 organized by upload date
         Post.findAll( {
-            offset: pageOffset, 
-            limit: 10,
+            limit: totalRequested,
             order : [['updatedAt', 'DESC']],
             raw: true,
             include: [
@@ -31,8 +32,7 @@ exports.displayAllPosts = (request, response, next) => {
         } )
         
         .then((posts) => {
-            console.log("lenght is" + posts.length);  
-            if(posts.length > 0) {
+            if( totalRequested <= posts.length + itemsPerPage ) {
                 //sending back response
                 return response.status(200).json(posts);
             } else {
@@ -219,7 +219,6 @@ exports.deletePost = (request, response, next) => {
     //pagination aid varialbes. if there is a "page" query string, we substract 1 and multiply it by 10. Thats the amount of offset we need
     const index = request.query.page ? request.query.page - 1 : 0;
     const pageOffset = request.query.page ? 10 * index : 0;
-    console.log(index, pageOffset);
 
     try {
         //finding Comments that match post ID in the database and returning first 10 organized by upload date

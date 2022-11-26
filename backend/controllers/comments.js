@@ -14,7 +14,7 @@ exports.createComment = (request, response, next) => {
     
     //Defining needed variables
     const user_id = request.auth.user_id;
-    const post_id = request.params._id
+    const post_id = request.params.post_id
 
     //storing data from request in variable
     let { bodyText } = request.body.post;

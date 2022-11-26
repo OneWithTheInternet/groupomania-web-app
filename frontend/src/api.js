@@ -1,4 +1,3 @@
-//const apiUrl = 'http://localhost:3000/api';
 const apiUrl = 'http://localhost:3000/v1/api';
 
 /**
@@ -20,9 +19,8 @@ const makeRequest = {
                     } 
                 });
 
-                //Returning data in JSON format if request is successful
+                //Returning data if request is successful
                 if (requestResponse.ok) {
-
                     return await requestResponse.json()
                     
                     //Cheking for errors
@@ -215,12 +213,3 @@ const makeRequest = {
 
 
 export default makeRequest
-
-
-
-/*
-            //Accessing the URL parameteres
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const user_id = urlParams.get('user_id');            
-*/

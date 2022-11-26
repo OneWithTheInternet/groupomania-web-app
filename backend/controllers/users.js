@@ -190,23 +190,24 @@ exports.deleteUser = (request, response, next) => {
         .then((user) => {
             
             //Checking user exists in database
-            if (!user || user == null) {
+            if ( user ) {
+                
+                //Deleting user in database
+                user.destroy()
+                .then (() => {
+                    response.status(200).json({message: "user " + user.userName + " deleted sucessfully"})
+                })
+                
+                .catch ((error) => {
+                    response.status(400).json(error);        
+                })
+                
+            } else {
                 return response.status(404).json({
                     error: 'Resource not found'
                 });
             }
 
-            //Deleting post in database
-            user.destroy()
-            .then (() => {
-                console.log(user);
-                response.status(200).json({message: "user " + user.userName + " deleted sucessfully"})
-            })
-
-            .catch ((error) => {
-                response.status(400).json(error);
-
-            })
         })
         
         //Catching database query errors

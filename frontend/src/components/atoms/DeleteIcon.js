@@ -43,10 +43,6 @@ function DeleteIcon(props) {
                 setErrorMessage("");
                 setIsRequestDone(true);
                 setIsRequestBad(false);
-                //refreshing web page
-                setTimeout(function(){
-                    window.location.reload();
-                }, 500);
 
             } else {
                 setData(responseData.error);
