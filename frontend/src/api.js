@@ -60,6 +60,31 @@ const makeRequest = {
             }
         },
 
+        displayPost: async (post_id) => { 
+
+            try {
+                const requestResponse = await fetch(apiUrl + '/posts/' + post_id, { 
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    } 
+                });
+
+                //Returning data if request is successful
+                if (requestResponse.ok) {
+                    return await requestResponse.json()
+                    
+                    //Cheking for errors
+                } else {
+                    return await requestResponse.json()
+                }
+                
+            } catch (error) {
+                return error
+            }
+        },
+
         createPost: async (userInput) => {
             try {
                 const requestResponse = await fetch(apiUrl + '/posts', { 

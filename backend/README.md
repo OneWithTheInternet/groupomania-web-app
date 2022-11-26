@@ -39,8 +39,8 @@ POST v1/api/users/login                     <!-- logs user into their account | 
 GET v1/api/users/:id                        <!-- Returns info about a single user -->
 DELETE v1/api/auth/users/:_id               <!-- deletes user | token -->*
 
-GET v1/api/posts                            <!-- Returns all posts in the database -->*
-GET v1/api/posts?page=3                     <!-- Returns third page of posts in the database -->*
+GET v1/api/posts                            <!-- Returns all posts in the database up to the limit set by pageNumber parameter and in increments of 10 posts per page-->*
+GET v1/api/posts?page=3                     <!-- Returns up to the third page of posts in the database -->*
 POST v1/api/auth/posts                      <!-- creates a post | token, "post" object with fields "altText" and "bodyText", image field containing a file -->*
 GET v1/api/posts/:_id                       <!-- returns specified post | "post" object with fields "userId" and "postId" -->*
 DELETE /api/auth/posts/:id                  <!-- deletes post from database | "post" object with fields "user_id", post ID as URL param-->*

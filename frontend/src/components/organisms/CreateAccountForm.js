@@ -92,7 +92,7 @@ function CreateAccountForm() {
                             value={ emailValue } 
                             placeholder={ "example@example.com" }
                             required
-                            autocomplete="email"
+                            autoComplete="email"
                             //Accessing the value after user's input. Setting the value to variable "inputValue""
                             onChange={(event) => setEmailValue(event.target.value)}
                         />
@@ -105,7 +105,7 @@ function CreateAccountForm() {
                             required
                             maxLength={20}
                             minLength={6}
-                            autocomplete="new-password"
+                            autoComplete="new-password"
                             //Accessing the value after user's input. Setting the value to variable "inputValue""
                             onChange={(event) => setPasswordValue(event.target.value)}
                         />

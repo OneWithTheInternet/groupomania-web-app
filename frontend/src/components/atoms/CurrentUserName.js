@@ -1,5 +1,5 @@
 import makeRequest from "../../api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ErrorMessage from "./ErrorMessage";
 
 function CurrentUserName(props) {
@@ -31,7 +31,20 @@ function CurrentUserName(props) {
         }
     }
 
-    getCurrentUserName();
+    /**
+     * Triggers data fetching after page has loaded
+     */
+    useEffect(() => {
+        getCurrentUserName();
+      return () => {
+        setData([]);
+        setErrorMessage('');
+        setIsRequestDone(false);
+        setIsRequestBad(false)
+      }
+    }, [])
+    
+
 
     const Component = () => <b><strong>@{ data }</strong></b>;
 

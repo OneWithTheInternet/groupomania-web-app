@@ -57,6 +57,7 @@ function LoginForm() {
                     value={ emailValue } 
                     placeholder={ "example@example.com" }
                     required
+                    autoComplete="email"
                     //Accessing the value after user's input. Setting the value to variable "inputValue""
                     onChange={(event) => setEmailValue(event.target.value)}
                 />
@@ -69,6 +70,7 @@ function LoginForm() {
                     required
                     maxLength={20}
                     minLength={6}
+                    autoComplete="current-password"
                     //Accessing the value after user's input. Setting the value to variable "inputValue""
                     onChange={(event) => setPasswordValue(event.target.value)}
                 />
@@ -78,7 +80,7 @@ function LoginForm() {
 
             { errorMessage === '' ? null : <ErrorMessage error= {errorMessage}/> } 
             
-            { isLoggedIn == true ? <Navigate to='/' replace/> : null }
+            { isLoggedIn === true ? <Navigate to='/' replace/> : null }
 
         </form>
     )

@@ -116,7 +116,7 @@ exports.createPost = (request, response, next) => {
 exports.displayPost = (request, response, next) => {
     try {
         //Finding specified object in the database
-        Post.findOne({ where: { post_id: request.params._id } })
+        Post.findOne({ where: { post_id: request.params.post_id } })
         
         //Sending 'post' object data as response
         .then((post) => {
