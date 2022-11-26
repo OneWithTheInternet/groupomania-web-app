@@ -1,5 +1,6 @@
 import makeRequest from "../../api";
 import { useState } from "react";
+import ErrorMessage from "./ErrorMessage";
 
 function CurrentUserName(props) {
     //error states
@@ -35,7 +36,7 @@ function CurrentUserName(props) {
     const Component = () => <b><strong>@{ data }</strong></b>;
 
     return <div className="userTag__userContainer__nameContainer">
-        {isRequestBad ? <errorMessage error={errorMessage} /> : null }
+        {isRequestBad ? <ErrorMessage error={errorMessage} /> : null }
         {isRequestDone ? <Component /> : null}
     </div>
 }

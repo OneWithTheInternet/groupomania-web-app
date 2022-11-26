@@ -82,7 +82,7 @@ function CreateAccountForm() {
                             maxLength={20}
                             minLength={3}
                             //Accessing the value after user's input. Setting the value to variable "inputValue""
-                            onChange={(event) => setUserNameValue(event.target.value)}
+                            onChange={(event) => { setUserNameValue(event.target.value) }}
                         />
                     </label>
                     
@@ -92,6 +92,7 @@ function CreateAccountForm() {
                             value={ emailValue } 
                             placeholder={ "example@example.com" }
                             required
+                            autocomplete="email"
                             //Accessing the value after user's input. Setting the value to variable "inputValue""
                             onChange={(event) => setEmailValue(event.target.value)}
                         />
@@ -104,6 +105,7 @@ function CreateAccountForm() {
                             required
                             maxLength={20}
                             minLength={6}
+                            autocomplete="new-password"
                             //Accessing the value after user's input. Setting the value to variable "inputValue""
                             onChange={(event) => setPasswordValue(event.target.value)}
                         />

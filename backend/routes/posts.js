@@ -6,7 +6,7 @@ const multer = require('../middleware/multer-config');
 const postsCtrl = require('../controllers/posts');
 
 //Create post
-router.post('/auth/posts', auth, multer, postsCtrl.createPost);
+router.post('/posts', auth, multer, postsCtrl.createPost);
 //Display all posts
 router.get('/posts', auth, postsCtrl.displayAllPosts);
 //Display one post

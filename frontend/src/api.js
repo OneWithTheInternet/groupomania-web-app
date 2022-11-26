@@ -60,6 +60,29 @@ const makeRequest = {
             }
         },
 
+        createPost: async (userInput) => {
+            try {
+                const requestResponse = await fetch(apiUrl + '/posts', { 
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(userInput)
+                });
+
+                //Returning data in JSON format if request is successful
+                if (requestResponse.ok) {
+                    return await requestResponse.json()
+                    
+                    //Cheking for errors
+                } else {
+                    return await requestResponse.json()
+                }
+
+            } catch (error) {
+                return error
+            }
+        },
+
         deletePost: async (post_id) => {
             
             try {
