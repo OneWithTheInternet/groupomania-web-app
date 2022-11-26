@@ -8,16 +8,12 @@ const fs = require('fs');
 /**
  * Finds in the database all instances of the specified resouce and sends them back to the client
  * Uses the sequalize model to manage database
- * @param {data recieved from client} request 
- * @param {data sent back to client} response 
- * @param {express method. calls next middleware} next 
  */
 exports.displayAllPosts = (request, response, next) => {
 
     //pagination aid varialbes. if there is a "page" query string, we substract 1 and multiply it by 10. Thats the amount of offset we need
-    const index = request.query.page ? request.query.page - 1 : 0;
-    const pageOffset = request.query.page ? 10 * index : 0;
-    console.log(index, pageOffset);
+    const index = request.query.page - 1;
+    const pageOffset = 10 * index;
 
     try {
         //finding posts in the database and returning first 10 organized by upload date
@@ -34,9 +30,14 @@ exports.displayAllPosts = (request, response, next) => {
             ]
         } )
         
-        .then((posts) => {            
-            //sending back response
-            return response.status(200).json(posts);
+        .then((posts) => {
+            console.log("lenght is" + posts.length);  
+            if(posts.length > 0) {
+                //sending back response
+                return response.status(200).json(posts);
+            } else {
+                return response.status(404).json({error: 'No resources found'});
+            }         
         })
         
         .catch((error) => {

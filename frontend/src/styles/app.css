@@ -45,6 +45,7 @@ form label {
 form input {
   margin-top: 10px;
   height: 40px;
+  width: 100%;
 }
 
 textarea {
@@ -250,6 +251,15 @@ img {
 .errorMessage {
   color: red;
   margin: 10px 0px;
+}
+
+.loadMoreButton {
+  padding: 10px 10px;
+}
+.loadMoreButton__input {
+  margin-top: 10px;
+  height: 40px;
+  width: 100%;
 }
 
 body {

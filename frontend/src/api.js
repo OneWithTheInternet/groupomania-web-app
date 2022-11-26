@@ -10,9 +10,37 @@ const apiUrl = 'http://localhost:3000/v1/api';
  */
 const makeRequest = {
     posts: {
-        displayAll: async () => {
+        displayAll: async (pageNumber) => {
             try {
-                const requestResponse = await fetch(apiUrl + '/posts', { 
+                const requestResponse = await fetch(apiUrl + '/posts/?page=' + pageNumber, { 
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    } 
+                });
+
+                //Returning data in JSON format if request is successful
+                if (requestResponse.ok) {
+
+                    return await requestResponse.json()
+                    
+                    //Cheking for errors
+                } else {
+                    return await requestResponse.json()
+                }
+                
+            } catch (error) {
+                return error
+            }
+        },
+
+        loadMorePosts: async (pageNumber) => {
+
+            pageNumber = pageNumber + 1;
+
+            try {
+                const requestResponse = await fetch(apiUrl + '/posts/?page=' + pageNumber, { 
                     method: 'GET',
                     mode: 'cors',
                     headers: {

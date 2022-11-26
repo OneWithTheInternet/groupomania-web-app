@@ -1,4 +1,5 @@
 @use '../abstracts/variables';
+@use '../abstracts/mixins';
 
 form * {
     display: inline-block;
@@ -11,8 +12,7 @@ form label {
 }
 
 form input {
-    margin-top: 10px;
-    height: variables.$textInputHeight--default;
+    @include mixins.basicInputButton
 }
 
 textarea {

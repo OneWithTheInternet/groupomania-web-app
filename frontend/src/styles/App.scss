@@ -15,6 +15,7 @@
 @use './components/commentsCounter';
 @use './components/confirmationMessage';
 @use './components/errorMessage';
+@use "./components/loadMoreButton.scss";
 
 body {
     background-color: variables.$bgColor2;

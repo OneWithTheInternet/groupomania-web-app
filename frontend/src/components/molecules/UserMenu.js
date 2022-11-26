@@ -20,7 +20,6 @@ function UserMenu(props) {
         }
     }
 
-
     return <div className='userMenu'>
 
         <CurrentUserName />

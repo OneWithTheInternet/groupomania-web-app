@@ -18,12 +18,11 @@ function Header(props) {
                 <Routes>
                     <Route element={<UserMenu />} >
                         <Route path="/" element={<Home />}/>
-                        <Route path="/post/:id" element={<Post />}/>
+                        <Route path="/post/:post_id" element={<Post />}/>
                         <Route path='/createpost' element={<CreatePost />}/>
                         <Route path='/account-settings' element={<AccountSettings />} />
                     </Route>
                 </Routes>
-                {/* <UserMenu /> */}
             </header>
         </div>
     )

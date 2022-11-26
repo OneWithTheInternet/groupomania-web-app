@@ -7,6 +7,7 @@ import CreationDate from "../atoms/CreationDate";
 
 function PostCard(props) {
 
+    
     //Using map() method to loop over data array and create each post from it
     let cards = props.data.map((post) => (
         //addding an article DOM element with envent handler

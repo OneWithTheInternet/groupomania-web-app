@@ -148,7 +148,10 @@ exports.displayOneUser = (request, response, next) => {
     
     try {
         //Finding specified object in the database
-        User.findOne({ where: { user_id: request.params.user_id } })
+        User.findOne({ 
+            where: { user_id: request.params.user_id },
+            attributes: ['user_id', 'userName', 'createdAt'] 
+        })
         //Sending 'user' object data as response
         .then((user) => {
             //Checking user exists in database

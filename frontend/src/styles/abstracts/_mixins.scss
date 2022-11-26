@@ -11,3 +11,9 @@
     display: inline-block;
     width: 100%;
 }
+
+@mixin basicInputButton {
+    margin-top: 10px;
+    height: variables.$textInputHeight--default;
+    width: 100%;
+}
