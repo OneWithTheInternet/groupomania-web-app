@@ -26,19 +26,18 @@ const User = dbConnect.define('user', {
     },
     password: {
         type: DataTypes.STRING(500),
-        allowNull: false,
-        unique: true
+        allowNull: false
     }
 });
 
 //Creating associations between model
-User.hasOne(Post, {
+User.hasMany(Post, {
     foreignKey: 'user_id'
   });
 Post.belongsTo(User, {
     foreignKey: 'user_id'
   });
-User.hasOne(Comment, {
+User.hasMany(Comment, {
     foreignKey: 'user_id'
   });
 Comment.belongsTo(User, {

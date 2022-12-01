@@ -75,17 +75,17 @@ function Post() {
 
     <section className='comments'>
 
-      <CommentsCounter post_id={data.post_id} />
+      <CommentsCounter comments={data.comments} />
 
       <hr></hr>
 
-      <Comment post_id={data.post_id}/>
+      <Comment comments={data.comments}/>
 
     </section>
 
     <section className='leaveCommentsSection'>
 
-      <LeaveComment userName={ data.user.userName } post_id={data.post_id} />
+      <LeaveComment post_id={data.post_id} />
 
     </section>
   </div> 

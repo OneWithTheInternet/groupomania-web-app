@@ -22,11 +22,15 @@ exports.displayAllPosts = (request, response, next) => {
         Post.findAll( {
             limit: totalRequested,
             order : [['updatedAt', 'DESC']],
-            raw: true,
+            // raw: true,
             include: [
                 {
                     model: User,
                     attributes: ['userName']
+                },
+                {
+                    model: Comment,
+                    attributes: ['comment_id']
                 }
             ]
         } )
@@ -121,10 +125,19 @@ exports.displayPost = (request, response, next) => {
         //Finding specified object in the database
         Post.findOne({ 
             where: { post_id: request.params.post_id },
-            include: [{
-                model: User,
-                attributes: ['userName']
-            }] 
+            include: [
+                //including necesary user info 
+                {
+                    model: User,
+                    attributes: ['userName']
+                },
+                //including posts' comments
+                {
+                    model: Comment,
+                    //including name of the user who made the comment
+                    include: [{model: User, attributes: ['userName']}] 
+                }
+            ] 
         })
         
         //Sending 'post' object data as response

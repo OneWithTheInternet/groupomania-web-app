@@ -118,6 +118,7 @@ exports.loginUser = (request, response, next) => {
 
                     response.status(200).json([{
                         user_id: user.user_id,
+                        userName: user.userName,
                         token: token
                     }])
                 })

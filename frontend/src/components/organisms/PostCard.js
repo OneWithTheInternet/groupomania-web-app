@@ -11,7 +11,7 @@ function PostCard(props) {
         //addding an article DOM element with envent handler
        <article className="postCard" key={ post.post_id }>
 
-            <UserTag userName = { post["user.userName"] } user_id = {post.user_id} post_id = {post.post_id} forResource={"post"} />
+            <UserTag userName = { post.user.userName } user_id = {post.user_id} post_id = {post.post_id} forResource={"post"} />
 
             <Link to={'posts/' + post.post_id}>
                 
@@ -21,7 +21,8 @@ function PostCard(props) {
                 
                 {post.image_url ? <PostImage image_url={ post.image_url } image_altText={ post.image_altText }/> : null}
                 
-                <CommentsCounter post={post} />              
+                <CommentsCounter comments={post.comments} /> 
+                             
             </Link>
         </article>
     ));

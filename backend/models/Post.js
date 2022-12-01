@@ -30,7 +30,7 @@ const Post = dbConnect.define('post', {
 });
 
 //Creating associations between model
-Post.hasOne(Comment, {
+Post.hasMany(Comment, {
     foreignKey: 'post_id'
   });
 Comment.belongsTo(Post, {

@@ -3,7 +3,7 @@ import PostCard from "./PostCard";
 import makeRequest from "../../api";
 import ErrorMessage from '../atoms/ErrorMessage';
 import LoadMoreButton from '../atoms/LoadMoreButton';
-import RedirectLoggedOut from '../atoms/RedirectLoggedOut';
+
 function NewPostsSection() {
   //State variables to handle errors
   const [isRequestBad, setIsRequestBad] = useState(false);
@@ -57,7 +57,6 @@ function NewPostsSection() {
         //setting state to previus data convined with new data
         setData(responseData);
         setPageNumber(pageNumber + 1);
-        console.log(data);
         setIsRequestBad(false);
 
         //Handling request errors and returning error message
@@ -72,7 +71,7 @@ function NewPostsSection() {
   }
 
   /**
-   * Fetches data to be displayed
+   * Calls for data fetching function on page load
    */
   useEffect(() => {
 

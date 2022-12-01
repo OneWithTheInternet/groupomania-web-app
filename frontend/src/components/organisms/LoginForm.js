@@ -35,6 +35,7 @@ function LoginForm() {
             //Setting token to local storage
             if (!responseData[0].error && !responseData[0].error) {
                 localStorage.setItem("user_id", responseData[0].user_id);
+                localStorage.setItem("userName", responseData[0].userName);
                 localStorage.setItem("token", responseData[0].token);
                 setIsLoggedIn(true);
                 return setErrorMessage('');

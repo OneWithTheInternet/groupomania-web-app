@@ -59,7 +59,7 @@ function LeaveComment(props) {
 
     <div className='leaveComment'>
     
-      <UserTag userName={ props.userName }/>
+      <UserTag userName={ localStorage.getItem('userName') }/>
     
       <form className='leaveComment__form' onSubmit={(event) => {createComment(event)}}>
 

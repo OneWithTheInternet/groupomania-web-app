@@ -4,6 +4,7 @@ import makeRequest from "../../api";
 import ErrorMessage from '../atoms/ErrorMessage';
 import ConfirmationMessage from "../atoms/ConfirmationMessage";
 import { Link } from "react-router-dom";
+import Redirect from "../atoms/Redirect";
 
 function CreateAccountForm() {
     //error state
@@ -37,7 +38,7 @@ function CreateAccountForm() {
             const responseData = await makeRequest.users.createUser(userInput);
 
             //handling response
-            if ( !responseData[0].error && !responseData[0].error ) {
+            if ( !responseData[0].error && !responseData[0].errors) {
                 setData(responseData[0].message);
                 setErrorMessage('');
                 setIsRequestDone(true);
@@ -45,16 +46,13 @@ function CreateAccountForm() {
 
             //Handling errors
             } else {
-                if(responseData[0].error) {
+                if (responseData[0].error ){
                     setErrorMessage(responseData[0].error);
                     setData('');
                     setIsRequestDone(false);
                     setIsRequestBad(true)
-                }
-                //There might be two different error formats (response.error or respones.errors)
-                 //Handling alternative error format
-                if (responseData[0].error){
-                    setErrorMessage(responseData[0].error);
+                } else if ( responseData[0].errors ) {
+                    setErrorMessage(responseData[0].errors[0].message);
                     setData('');
                     setIsRequestDone(false);
                     setIsRequestBad(true)
@@ -121,7 +119,9 @@ function CreateAccountForm() {
 
             { isRequestDone ? <ConfirmationMessage message= {data}/> : null }
             
-            { isRequestDone ? <Link to='/login'><u>log into your account</u></Link> : null }
+            {/* { isRequestDone ? <Link to='/login'><u>log into your account</u></Link> : null } */}
+ 
+            { isRequestDone ? <Redirect path={'/login'} /> : null }
 
         </form>
     )
