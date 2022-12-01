@@ -20,7 +20,7 @@ module.exports = (request, response, next) => {
 
         //verifying that there is an user id in the token and that it matches the 
         if (!user_id) {
-            return response.status(403).json({ error: "You don't have permission to do this" });
+            return response.status(403).json([{ error: "You don't have permission to do this" }]);
         } else {
             //Passing authorization
             next();
@@ -28,9 +28,9 @@ module.exports = (request, response, next) => {
 
     } catch (error) {
         if (request.headers.authorization) {
-            response.status(401).json({error: 'invalid token'});
+            response.status(401).json([{error: 'invalid token'}]);
         } else {
-            response.status(401).json({error: 'Authorization failed'});
+            response.status(401).json([{error: 'Authorization failed'}]);
         }
     }
 }

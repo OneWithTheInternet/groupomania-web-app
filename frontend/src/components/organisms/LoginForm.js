@@ -33,18 +33,27 @@ function LoginForm() {
             //Make API request next
             const responseData = await makeRequest.users.loginUser(userInput);
             //Setting token to local storage
-            if (!responseData.error) {
-                localStorage.setItem("user_id", responseData.user_id);
-                localStorage.setItem("token", responseData.token);
+            if (!responseData[0].error && !responseData[0].error) {
+                localStorage.setItem("user_id", responseData[0].user_id);
+                localStorage.setItem("token", responseData[0].token);
                 setIsLoggedIn(true);
                 return setErrorMessage('');
+
             } else {
-                setErrorMessage(responseData.error);
-                setIsLoggedIn(false);
+                if(responseData[0].error) {
+                    setErrorMessage(responseData[0].error);
+                    setIsLoggedIn(false);
+                }
+                //There might be two different error formats (response.error or respones.errors)
+                //Handling alternative error format
+                if (responseData[0].error){
+                    setErrorMessage(responseData[0].error);
+                    setIsLoggedIn(false);
+                }
             }
         } catch (error) {
-            setErrorMessage(error)
-            setIsLoggedIn(false);
+            setErrorMessage(error.error);
+            return setIsLoggedIn(false);
         }
     }
     

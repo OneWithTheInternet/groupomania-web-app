@@ -1,52 +1,58 @@
 import makeRequest from "../../api";
 import TextArea from "../atoms/TextArea";
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import ErrorMessage from '../atoms/ErrorMessage';
 import ConfirmationMessage from "../atoms/ConfirmationMessage";
 
 function CreatePost() {
     //error state
     const [errorMessage, setErrorMessage] = useState('');
-    //request state
+    //request states
     const [isRequestDone, setIsRequestDone] = useState(false);
     const [isRequestBad, setIsRequestBad] = useState(false);
-    //Creating state variables to store response from API request 
+    //State to store response from API request 
     const [data, setData] = useState('');
-    //Using useState to store user's input in as variables
+    //Using useState to store user's input in variables
     const [image, setImage] = useState(null);
-    const [imageAltText, setImageAltText] = useState(null);
+    const [image_altText, setImage_altText] = useState(null);
     const [bodyText, setBodyText] = useState(null);
     const userInput = {
         post: {
             image: image,
-            imageAltText: imageAltText,
+            image_altText: image_altText,
             bodyText: bodyText
         }
     }
-
     /**
-     * creates a post
+     * creates a post in database by making request to back-end
      */
     async function createPost() {
         try {
             const responseData = await makeRequest.posts.createPost(userInput);
 
-            if(!responseData.error) {
-                setData(responseData.message);
+            if(!responseData[0].error) {
+                setData(responseData[0].message);
                 setErrorMessage('');
                 setIsRequestDone(true);
                 setIsRequestBad(false);
             } else {
-                setErrorMessage(responseData.error);
+                setErrorMessage(responseData[0].error);
                 setData('');
                 setIsRequestDone(false);
                 setIsRequestBad(true)
             }
         } catch (error) {
+            setIsRequestBad(true);
+            setIsRequestDone(false);
             return setErrorMessage(error.error);
         }
     }
-
+    /**
+     * Handles what happens when user clicks on submit button. Prevents default submit behavior
+     */
+    function handleSubmit() {
+        console.log("submit this");
+    }
     return (
     <div className='sectionsContainer'>
         <section className='createPost'>
@@ -61,6 +67,15 @@ function CreatePost() {
                         accept="image/*"
                         onChange={(event) => { setImage(event.target.value) }} 
                     />                   
+                </label>
+
+                <label>
+                    Alt text (describe your image)
+                    <input 
+                        type="text" 
+                        placeholder='Write here...'
+                        onChange={(event) => { setImage_altText(event.target.value) }}
+                    />
                 </label>
 
                 <label>

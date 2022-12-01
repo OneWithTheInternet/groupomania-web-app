@@ -5,7 +5,7 @@ import makeRequest from "../../api";
 import ConfirmationMessage from "./ConfirmationMessage";
 import ErrorMessage from "./ErrorMessage";
 
-function DeleteIcon(props) {
+function DeleteIconComment(props) {
     //console.log("render");
 
     //Error states
@@ -16,12 +16,34 @@ function DeleteIcon(props) {
     const [isRequestDone, setIsRequestDone] = useState(false);
     //Delete post icon access state
     const [postBelongsToUser, setPostBelongsToUser] = useState(false);
-
+    /**
+     * Deletes post from database by calling a request
+     */
+    async function deletePost() {
+        try {
+            const responseData = await makeRequest.comments.deleteComment(props.comment_id);
+            if (!responseData[0].error) {
+                setData(responseData[0].message);
+                setErrorMessage("");
+                setIsRequestDone(true);
+                setIsRequestBad(false);
+                
+            } else {
+                setData(responseData[0].error);
+                setErrorMessage(responseData[0].error);
+                setIsRequestDone(false);
+                setIsRequestBad(true)
+            }
+        } catch (error) {
+            setErrorMessage(error.error);
+            return setIsRequestBad(true)
+        }
+    }
     /**
      * Checks if post belongs to the user trying to delete it and updates stetes accordingly
      */
     useEffect(() => {    
-      //Cheking if User is the creator of the post
+        //Cheking if User is the creator of the post
         if (props.user_id && props.user_id === parseInt(localStorage.user_id)) {
             setPostBelongsToUser(true)
         }
@@ -32,28 +54,6 @@ function DeleteIcon(props) {
 
     }, [props.user_id])
 
-    /**
-     * Deletes post from database by calling a request
-     */
-    async function deletePost() {
-        try {
-            const responseData = await makeRequest.posts.deletePost(props.post_id);
-            if (!responseData.error) {
-                setData(responseData.message);
-                setErrorMessage("");
-                setIsRequestDone(true);
-                setIsRequestBad(false);
-
-            } else {
-                setData(responseData.error);
-                setErrorMessage(responseData.error);
-                setIsRequestDone(false);
-                setIsRequestBad(true)
-            }
-        } catch (error) {
-            return setErrorMessage(error)
-        }
-    }
     
     // Icon component
     const Component = () => <div className="userTag_deleteIconContainer" onClick={ () => { deletePost() } }>
@@ -67,4 +67,4 @@ function DeleteIcon(props) {
     </>
 }
 
-export default DeleteIcon
+export default DeleteIconComment

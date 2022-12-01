@@ -27,7 +27,6 @@ function CreateAccountForm() {
 
     /**
      * Adds new user to database
-     * @param {logs information about the user triggered event} event 
      */
      async function createUser(event) {
         //Prevent page from reloading when clicking submit
@@ -37,32 +36,33 @@ function CreateAccountForm() {
             //making api request
             const responseData = await makeRequest.users.createUser(userInput);
 
-            //If there are no errors in the reaquest set the "data" state to the retreived data
-            if ( !responseData.errors && !responseData.error) {
-            setData(responseData.message);
-            setErrorMessage('');
-            setIsRequestDone(true);
-            setIsRequestBad(false);
+            //handling response
+            if ( !responseData[0].error && !responseData[0].error ) {
+                setData(responseData[0].message);
+                setErrorMessage('');
+                setIsRequestDone(true);
+                setIsRequestBad(false);
 
-            //Handling request errors and returning error message
+            //Handling errors
             } else {
-                if(responseData.error) {
-                    setErrorMessage(responseData.error);
+                if(responseData[0].error) {
+                    setErrorMessage(responseData[0].error);
                     setData('');
                     setIsRequestDone(false);
                     setIsRequestBad(true)
                 }
-                
-                if (responseData.errors){
-                    setErrorMessage(responseData.errors[0].message);
+                //There might be two different error formats (response.error or respones.errors)
+                 //Handling alternative error format
+                if (responseData[0].error){
+                    setErrorMessage(responseData[0].error);
                     setData('');
                     setIsRequestDone(false);
                     setIsRequestBad(true)
                 }
             }
-
         } catch (error) {
-            return setErrorMessage(error.error);
+            setErrorMessage(error.error);
+            return setIsRequestBad(true)
         }
     }
     

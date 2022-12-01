@@ -61,14 +61,13 @@ const makeRequest = {
         },
 
         displayPost: async (post_id) => { 
-
             try {
                 const requestResponse = await fetch(apiUrl + '/posts/' + post_id, { 
                     method: 'GET',
                     mode: 'cors',
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("token")
-                    } 
+                    }, 
                 });
 
                 //Returning data if request is successful
@@ -253,6 +252,57 @@ const makeRequest = {
                 }
             } catch (error) {
                 return error 
+            }
+        },
+
+        deleteComment: async (comment_id) => {
+
+            try {
+                const requestResponse = await fetch(apiUrl + '/comments/' + comment_id, { 
+                    method: 'DELETE',
+                    mode: 'cors',
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    } 
+                });
+
+                //Returning data in JSON format if request is successful
+                if (requestResponse.ok) {
+                    return await requestResponse.json()
+                    
+                    //Cheking for errors
+                } else {
+                    return await requestResponse.json()
+                }
+
+            } catch (error) {
+                return error
+            }  
+        },
+
+        createComment: async (userInput, post_id) => {
+            try {
+                const requestResponse = await fetch(apiUrl + "/posts/" + post_id + "/comments", { 
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    },
+                    body: JSON.stringify(userInput)
+                });
+
+                //Returning data in JSON format if request is successful
+                if (requestResponse.ok) {
+                    return await requestResponse.json()
+                    
+                    //Cheking for errors
+                } else {
+                    return await requestResponse.json()
+                }
+
+            } catch (error) {
+                return error
             }
         }
     }

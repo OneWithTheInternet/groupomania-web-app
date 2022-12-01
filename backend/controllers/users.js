@@ -47,18 +47,18 @@ exports.createUser = (request, response, next) => {
                 
                 //Sending back response
                 .then(() => {
-                    response.status(201).json({message: 'user created successfully'})
+                    response.status(201).json([{message: 'user created successfully'}])
                 })
 
                 //catching databse request errors
                 .catch((error) => {
-                    response.status(400).json(error);
+                    response.status(400).json([error]);
                 })
             })
             
         //catching request errors 
         } catch (error) {
-            response.status(400).json(error);
+            response.status(400).json([error]);
         }
     }
 }
@@ -97,7 +97,7 @@ exports.loginUser = (request, response, next) => {
             .then((user) => {
                 //response if there where no results
                 if (user == null || !user) {
-                    return response.status(401).json({ error: 'User not found!' })
+                    return response.status(401).json([{ error: 'User not found!' }])
                 }
 
                 //Cheking password validity using bcrypt package
@@ -106,8 +106,7 @@ exports.loginUser = (request, response, next) => {
                 .then( (valid) => {
                     //sending response
                     if (!valid || valid == false) {
-                        console.log(user);
-                        return response.status(401).json({ error: 'Incorrect user or password'});
+                        return response.status(401).json([{ error: 'Incorrect user or password'}]);
                     }
                     
                     //Creating a token
@@ -117,28 +116,28 @@ exports.loginUser = (request, response, next) => {
                         {expiresIn: '24h'}
                     );
 
-                    response.status(200).json({
+                    response.status(200).json([{
                         user_id: user.user_id,
                         token: token
-                    })
+                    }])
                 })
                 
                 //Catching bcrypt request errors
                 .catch(
                     (error) => {
-                    return response.status(401).json(error);
+                    return response.status(401).json([error]);
                     }
                 );
             })
             
             //Catching database request errors
             .catch((error) => {
-                response.status(500).json(error);
+                response.status(500).json([error]);
             })
             
             //Catching request errors
         } catch (error) {
-            response.status(400).json(error);
+            response.status(400).json([error]);
         }       
     }
 }
@@ -156,19 +155,19 @@ exports.displayOneUser = (request, response, next) => {
         .then((user) => {
             //Checking user exists in database
             if (user !== null) {
-                return response.status(200).json(user)
+                return response.status(200).json([user])
             } else {
                 //response if there where no results
-                return response.status(404).json({ error: 'User not found!' })
+                return response.status(404).json([{ error: 'User not found!' }])
             }
         })
         //Catching database request errors
         .catch((error) => {
-            response.status(500).json(error);
+            response.status(500).json([error]);
         })       
         //Catching request errors
     } catch (error) {
-        response.status(400).json(error);
+        response.status(400).json([error]);
     }       
     
 }
@@ -195,29 +194,29 @@ exports.deleteUser = (request, response, next) => {
                 //Deleting user in database
                 user.destroy()
                 .then (() => {
-                    response.status(200).json({message: "user " + user.userName + " deleted sucessfully"})
+                    response.status(200).json([{message: "user " + user.userName + " deleted sucessfully"}])
                 })
                 
                 .catch ((error) => {
-                    response.status(400).json(error);        
+                    response.status(400).json([error]);        
                 })
                 
             } else {
-                return response.status(404).json({
+                return response.status(404).json([{
                     error: 'Resource not found'
-                });
+                }]);
             }
 
         })
         
         //Catching database query errors
         .catch((error) => {
-            response.status(400).json(error);
+            response.status(400).json([error]);
         })
         
      //Catching request errors   
     } catch (error) {
-        response.status(400).json(error);
+        response.status(400).json([error]);
     }
 
 }

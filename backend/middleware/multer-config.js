@@ -27,5 +27,5 @@ try {
   module.exports = multer({storage: storage}).single('image');
   
 } catch (error) {
-  return response.status(500).json({message: error});
+  return response.status(500).json([error]);
 }

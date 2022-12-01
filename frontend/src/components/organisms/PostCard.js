@@ -6,14 +6,12 @@ import {Link} from 'react-router-dom';
 import CreationDate from "../atoms/CreationDate";
 
 function PostCard(props) {
-
-    
     //Using map() method to loop over data array and create each post from it
     let cards = props.data.map((post) => (
         //addding an article DOM element with envent handler
        <article className="postCard" key={ post.post_id }>
 
-            <UserTag userName = { post["user.userName"] } user_id = {post.user_id} post_id = {post.post_id} />
+            <UserTag userName = { post["user.userName"] } user_id = {post.user_id} post_id = {post.post_id} forResource={"post"} />
 
             <Link to={'posts/' + post.post_id}>
                 

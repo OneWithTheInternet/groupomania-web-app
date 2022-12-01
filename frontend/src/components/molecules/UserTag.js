@@ -1,6 +1,7 @@
 import UserName from "../atoms/UserName";
 import UserImage from '../atoms/UserImage';
-import DeleteIcon from "../atoms/DeleteIcon";
+import DeleteIconPost from "../atoms/DeleteIconPost";
+import DeleteIconComment from "../atoms/DeleteIconComment";
 
 
 function UserTag(props) {
@@ -11,7 +12,17 @@ function UserTag(props) {
             <UserImage />
             <UserName userName = { props.userName }/>
         </div>
-        <DeleteIcon user_id = { props.user_id } post_id = { props.post_id } />
+
+        {props.forResource == "post" ? 
+            <DeleteIconPost user_id = { props.user_id } post_id = { props.post_id } />
+            : null
+        }
+
+        {props.forResource == "comment" ? 
+            <DeleteIconComment user_id = { props.user_id } comment_id = { props.comment_id } />
+            : null
+        }
+        
     </div>
 }
 

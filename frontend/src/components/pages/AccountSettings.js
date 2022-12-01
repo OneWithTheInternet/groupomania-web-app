@@ -2,7 +2,6 @@ import makeRequest from "../../api";
 import { useState } from 'react';
 import ConfirmationMessage from "../atoms/ConfirmationMessage";
 import ErrorMessage from "../atoms/ErrorMessage";
-import { Navigate } from "react-router-dom";
 
 function AccountSettings () {
   //State variable to store server's response data
@@ -19,8 +18,8 @@ function AccountSettings () {
     try {
       const responseData = await makeRequest.users.deleteUser();
       
-      if(!responseData.error) {
-        setData(responseData);
+      if(!responseData[0].error) {
+        setData(responseData[0].message);
         setIsRequestDone(true);
         setErrorMessage('')
         setIsRequestBad(false);
@@ -32,7 +31,7 @@ function AccountSettings () {
         setData([]);
         setIsRequestDone(false);
         setIsRequestBad(true);
-        setErrorMessage(responseData.error)
+        setErrorMessage(responseData[0].error)
       }
 
     } catch (error) {
@@ -52,11 +51,9 @@ function AccountSettings () {
         
         <input type={'button'} value={"Delete Account"} onClick={() => {deleteAccount()}}/>
         
-        { isRequestDone ? <ConfirmationMessage message = { data.message } /> : null }
+        { isRequestDone ? <ConfirmationMessage message = { data } /> : null }
         
         { isRequestBad ? <ErrorMessage error = { errorMessage } /> : null}
-
-        { !localStorage.token ? <Navigate to={'/login'} /> : null }
       
       </section>
 

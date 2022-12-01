@@ -48,12 +48,12 @@ exports.createComment = (request, response, next) => {
 
             //Catching sql query errors
             .catch((error) => {
-                response.status(400).json(error);
+                response.status(400).json([error]);
             })
             
          //Catching request errors
         } catch (error) {
-            response.status(400).json(error);
+            response.status(400).json([error]);
         }
     }
 }
@@ -67,44 +67,44 @@ exports.createComment = (request, response, next) => {
 exports.deleteComment = (request, response, next) => {
     try {     
         //Finding specified instance in the database
-        Comment.findOne({ where: { comment_id: request.params.post_id } })
+        Comment.findOne({ where: { comment_id: request.params.comment_id } })
         
         //destroying comment
         .then((comment) => {
 
             //Checking comment exists in database
             if (!comment || comment == null) {
-                return response.status(404).json({
+                return response.status(404).json([{
                     error: 'Resource not found'
-                });
+                }]);
             }
 
             //Cheking user is authorized to delete comment by matching his ID to the post owner's ID
             if (comment.user_id !== request.auth.user_id) {
-                return response.status(401).json({
+                return response.status(401).json([{
                     error: 'Request not authorized'
-                });
+                }]);
             }
 
             //Deleting comment in database
             comment.destroy()
             .then (() => {
-                response.status(200).json({ message: "comment deleted sucessfully" })
+                response.status(200).json([{ message: "comment deleted sucessfully" }])
             })
 
             .catch ((error) => {
-                response.status(400).json(error);
+                response.status(400).json([error]);
 
             })
         })
         
         //Catching database query errors
         .catch((error) => {
-            response.status(400).json(error);
+            response.status(400).json([error]);
         })
         
      //Catching request errors   
     } catch (error) {
-        response.status(400).json(error);
+        response.status(400).json([error]);
     }
 }

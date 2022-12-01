@@ -36,15 +36,15 @@ exports.displayAllPosts = (request, response, next) => {
                 //sending back response
                 return response.status(200).json(posts);
             } else {
-                return response.status(404).json({error: 'No resources found'});
+                return response.status(404).json([{error: 'No resources found'}]);
             }         
         })
         
         .catch((error) => {
-            response.status(400).json(error);
+            response.status(400).json([error]);
         })    
     } catch (error) {
-        response.status(400).json(error);
+        response.status(400).json([error]);
     }
 }
 
@@ -76,6 +76,9 @@ exports.createPost = (request, response, next) => {
     if(!image_url && !bodyText || image_url == null && bodyText == null || !image_url && bodyText == null || image_url == null && !bodyText ) {
         errors.push({ error: 'Please add an image or text'})
     } 
+    if(image_altText && !image_url ) {
+        errors.push({ error: "Can't add alt text without submitting an image"})
+    } 
     if(errors.length > 0) {
         return response.status(400).json(errors)
     } else {
@@ -97,11 +100,11 @@ exports.createPost = (request, response, next) => {
                 response.status(201).json([{message: 'post created successfully'}])
             })
             .catch((error) => {
-                response.status(400).json(error);
+                response.status(400).json([error]);
             })
         
         } catch (error) {
-            response.status(400).json(error);
+            response.status(400).json([error]);
         }
     }
 }
@@ -116,26 +119,32 @@ exports.createPost = (request, response, next) => {
 exports.displayPost = (request, response, next) => {
     try {
         //Finding specified object in the database
-        Post.findOne({ where: { post_id: request.params.post_id } })
+        Post.findOne({ 
+            where: { post_id: request.params.post_id },
+            include: [{
+                model: User,
+                attributes: ['userName']
+            }] 
+        })
         
         //Sending 'post' object data as response
         .then((post) => {
 
             if (post !== null) {
                 //response if resource instance was found
-                response.json(post)
+                response.json([post])
             }
 
             else {
                 //response if there where no results
-                response.status(404).json({error: "Resource not found"})
+                response.status(404).json([{error: "Resource not found"}])
             }
         })
         .catch((error) => {
-            response.status(400).json(error);
+            response.status(400).json([error]);
         })  
     } catch (error) {
-        response.status(400).json(error);
+        response.status(400).json([error]);
     }
 }
 
@@ -156,16 +165,16 @@ exports.deletePost = (request, response, next) => {
 
             //Checking post exists in database
             if (!post || post == null) {
-                return response.status(404).json({
+                return response.status(404).json([{
                     error: 'Resource not found'
-                });
+                }]);
             }
 
             //Cheking user is authorized to delete post by mathing his ID to the post owner's ID
             if (post.user_id !== request.auth.user_id) {
-                return response.status(401).json({
+                return response.status(401).json([{
                     error: 'Request not authorized'
-                });
+                }]);
             }
 
             //Extracting image's name from resource instance. if no image_url, file name will be null
@@ -177,7 +186,7 @@ exports.deletePost = (request, response, next) => {
             if (filename !== null) {
                 fs.unlink('images/' + filename, (error) => {
                     if (error) {
-                        return response.status(500).json(error);
+                        return response.status(500).json([error]);
                     } 
                 });
             }
@@ -185,24 +194,24 @@ exports.deletePost = (request, response, next) => {
             //Deleting post in database
             post.destroy()
             .then (() => {
-                response.status(200).json({message: "post deleted sucessfully"})
+                response.status(200).json([{message: "post deleted sucessfully"}])
             })
 
             .catch ((error) => {
-                response.status(400).json(error);
+                response.status(400).json([error]);
 
             })
         })
         
         //Catching database query errors
         .catch((error) => {
-            response.status(400).json(error);
+            response.status(400).json([error]);
             console.log("Something went wrong: " + error)  
         })
         
      //Catching request errors   
     } catch (error) {
-        response.status(400).json(error);
+        response.status(400).json([error]);
         console.log("Something went wrong: " + error)  
     }
 }
@@ -234,14 +243,14 @@ exports.deletePost = (request, response, next) => {
         })
         
         //sending back response
-        .then((posts) => {
-            response.json(posts);
+        .then((comments) => {
+            response.json(comments);
         })
         
         .catch((error) => {
-            response.status(400).json(error);
+            response.status(400).json([error]);
         })    
     } catch (error) {
-        response.status(400).json(error);
+        response.status(400).json([error]);
     }
 }

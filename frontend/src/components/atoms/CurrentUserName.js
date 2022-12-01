@@ -1,6 +1,7 @@
 import makeRequest from "../../api";
 import { useEffect, useState } from "react";
 import ErrorMessage from "./ErrorMessage";
+import RedirectLoggedOut from "./RedirectLoggedOut";
 
 function CurrentUserName(props) {
     //error states
@@ -17,12 +18,12 @@ function CurrentUserName(props) {
     async function getCurrentUserName() {
         try {
             const responseData = await makeRequest.users.displayOneUser(localStorage.user_id);
-            if (!responseData.error) {
-                setData(responseData.userName);
+            if (!responseData[0].error) {
+                setData(responseData[0].userName);
                 setIsRequestDone(true);
                 setIsRequestBad(false)
             } else {
-                setErrorMessage(responseData.error);
+                setErrorMessage(responseData[0].error);
                 setIsRequestDone(false)
                 setIsRequestBad(true);
             }
@@ -49,8 +50,13 @@ function CurrentUserName(props) {
     const Component = () => <b><strong>@{ data }</strong></b>;
 
     return <div className="userTag__userContainer__nameContainer">
-        {isRequestBad ? <ErrorMessage error={errorMessage} /> : null }
+        
         {isRequestDone ? <Component /> : null}
+
+        {isRequestBad ? <ErrorMessage error={errorMessage} /> : null }
+        
+        {isRequestBad ? <RedirectLoggedOut error={errorMessage} /> : null}
+   
     </div>
 }
 

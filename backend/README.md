@@ -1,9 +1,8 @@
 ### Collections and Resources
 Users
     user
-        id
-        name
-        username
+        user_id
+        userName
         password
         createdAt
         updatedAt
@@ -12,10 +11,10 @@ Users
 
 Posts
     post
-        id
-        user Id
-        body text
-        alt Text
+        post_id
+        user_Id
+        bodyText
+        altText
         imageUrl
         createdAt
         updatedAt
@@ -24,12 +23,16 @@ Posts
 Comments
     comment
         id
-        user Id
-        post Id
-        body Text
+        user_Id
+        post_Id
+        bodyText
         createdAt
         updatedAt
 
+
+### Responses
+
+Backend is always going to respond with an array of one or more items or objescts. use Array[#] to access them in JavaScript.
 
 
 ### Endpoints
@@ -39,15 +42,14 @@ POST v1/api/users/login                     <!-- logs user into their account | 
 GET v1/api/users/:id                        <!-- Returns info about a single user -->
 DELETE v1/api/auth/users/:_id               <!-- deletes user | token -->*
 
-GET v1/api/posts                            <!-- Returns all posts in the database up to the limit set by pageNumber parameter and in increments of 10 posts per page-->*
-GET v1/api/posts?page=3                     <!-- Returns up to the third page of posts in the database -->*
+GET v1/api/posts?page=3                     <!-- Returns all posts in the database up to the limit set by pageNumber parameter and in increments of 10 posts per page-->*
 POST v1/api/auth/posts                      <!-- creates a post | token, "post" object with fields "altText" and "bodyText", image field containing a file -->*
 GET v1/api/posts/:_id                       <!-- returns specified post | "post" object with fields "userId" and "postId" -->*
 DELETE /api/auth/posts/:id                  <!-- deletes post from database | "post" object with fields "user_id", post ID as URL param-->*
 
-POST api/auth/posts/:_id/comments           <!-- creates a new comment | token, "post" object with a "bodyText", post ID as url param -->*
+POST api/auth/posts/:post_id/comments       <!-- creates a new comment | token, "post" object with a "bodyText", post ID as url param -->*
 GET api/posts/:post/comments                <!-- Returns all comments for a specified post -->
-DELETE /api/auth/comments/:_id              <!-- deletes comment | token, "post" object with fields "commentId" -->
+DELETE /api/auth/comments/:comment_id       <!-- deletes comment | token, "post" object with fields "commentId" -->
     
 
 
