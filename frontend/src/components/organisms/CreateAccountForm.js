@@ -39,7 +39,10 @@ function CreateAccountForm() {
 
             //handling response
             if ( !responseData[0].error && !responseData[0].errors) {
-                setData(responseData[0].message);
+                localStorage.setItem("user_id", responseData[0].user_id);
+                localStorage.setItem("userName", responseData[0].userName);
+                localStorage.setItem("token", responseData[0].token);
+                setData("User created successfully");
                 setErrorMessage('');
                 setIsRequestDone(true);
                 setIsRequestBad(false);
@@ -71,6 +74,18 @@ function CreateAccountForm() {
             {/* render form content only if user has not been created */}
             {isRequestDone === false ? 
                 <div>
+                    <label>email
+                        <input 
+                            type="email"
+                            value={ emailValue } 
+                            placeholder={ "example@example.com" }
+                            required
+                            autoComplete="email"
+                            //Accessing the value after user's input. Setting the value to variable "inputValue""
+                            onChange={(event) => setEmailValue(event.target.value)}
+                        />
+                    </label>
+                        
                     <label>User Name
                         <input 
                             type="text"
@@ -81,18 +96,6 @@ function CreateAccountForm() {
                             minLength={3}
                             //Accessing the value after user's input. Setting the value to variable "inputValue""
                             onChange={(event) => { setUserNameValue(event.target.value) }}
-                        />
-                    </label>
-                    
-                    <label>email
-                        <input 
-                            type="email"
-                            value={ emailValue } 
-                            placeholder={ "example@example.com" }
-                            required
-                            autoComplete="email"
-                            //Accessing the value after user's input. Setting the value to variable "inputValue""
-                            onChange={(event) => setEmailValue(event.target.value)}
                         />
                     </label>
 
@@ -121,7 +124,7 @@ function CreateAccountForm() {
             
             {/* { isRequestDone ? <Link to='/login'><u>log into your account</u></Link> : null } */}
  
-            { isRequestDone ? <Redirect path={'/login'} /> : null }
+            { isRequestDone ? <Redirect path={'/feed'} time={1500} /> : null }
 
         </form>
     )

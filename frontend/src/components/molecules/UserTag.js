@@ -14,7 +14,7 @@ function UserTag(props) {
         </div>
 
         {props.forResource == "post" ? 
-            <DeleteIconPost user_id = { props.user_id } post_id = { props.post_id } />
+            <DeleteIconPost user_id = { props.user_id } post_id = { props.post_id } setRemovedItems={props.setRemovedItems}/>
             : null
         }
 

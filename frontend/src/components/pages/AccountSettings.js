@@ -2,6 +2,7 @@ import makeRequest from "../../api";
 import { useState } from 'react';
 import ConfirmationMessage from "../atoms/ConfirmationMessage";
 import ErrorMessage from "../atoms/ErrorMessage";
+import Redirect from "../atoms/Redirect";
 
 function AccountSettings () {
   //State variable to store server's response data
@@ -23,10 +24,7 @@ function AccountSettings () {
         setIsRequestDone(true);
         setErrorMessage('')
         setIsRequestBad(false);
-        setTimeout(function(){
-          localStorage.clear("user_id", "token")
-          window.location.reload();
-        }, 500);
+        localStorage.clear("user_id", "token")
       } else {
         setData([]);
         setIsRequestDone(false);
@@ -52,6 +50,8 @@ function AccountSettings () {
         <input type={'button'} value={"Delete Account"} onClick={() => {deleteAccount()}}/>
         
         { isRequestDone ? <ConfirmationMessage message = { data } /> : null }
+
+        { isRequestDone ? <Redirect path={'/login'} time={1500} /> : null}
         
         { isRequestBad ? <ErrorMessage error = { errorMessage } /> : null}
       

@@ -56,12 +56,12 @@ function DeleteIconComment(props) {
 
     
     // Icon component
-    const Component = () => <div className="userTag_deleteIconContainer" onClick={ () => { deletePost() } }>
+    const DeleteCommentIcon = () => <div className="userTag_deleteIconContainer" onClick={ () => { deletePost() } }>
         <FontAwesomeIcon className="icon2" icon={faTrashCan} />
     </div>
 
     return <> 
-        { postBelongsToUser ? <Component /> : null } 
+        { postBelongsToUser ? <DeleteCommentIcon /> : null } 
         { isRequestDone ? <ConfirmationMessage message = { data } /> : null }
         { isRequestBad ? <ErrorMessage error = { errorMessage } /> : null}
     </>

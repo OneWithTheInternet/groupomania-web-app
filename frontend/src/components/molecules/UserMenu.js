@@ -3,8 +3,6 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import UserImage from "../atoms/UserImage";
 import {Link} from 'react-router-dom';
 import CurrentUserName from '../atoms/CurrentUserName';
-import { Navigate } from 'react-router-dom';
-import { useState } from 'react';
 
 
 function UserMenu(props) {

@@ -6,8 +6,6 @@ import ConfirmationMessage from "./ConfirmationMessage";
 import ErrorMessage from "./ErrorMessage";
 
 function DeleteIconPost(props) {
-    //console.log("render");
-
     //Error states
     const [isRequestBad, setIsRequestBad] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -27,7 +25,8 @@ function DeleteIconPost(props) {
                 setErrorMessage("");
                 setIsRequestDone(true);
                 setIsRequestBad(false);
-                
+                //Adding removed post's ID to the parent element state
+                props.setRemovedItems(removedItems => [...removedItems, props.post_id])
             } else {
                 setData(responseData[0].error);
                 setErrorMessage(responseData[0].error);
@@ -54,14 +53,15 @@ function DeleteIconPost(props) {
 
     }, [props.user_id])
 
+
     
     // Icon component
-    const Component = () => <div className="userTag_deleteIconContainer" onClick={ () => { deletePost() } }>
+    const DeletePostIcon = () => <div className="userTag_deleteIconContainer" onClick={ () => { deletePost() } }>
         <FontAwesomeIcon className="icon2" icon={faTrashCan} />
     </div>
 
     return <> 
-        { postBelongsToUser ? <Component /> : null } 
+        { postBelongsToUser ? <DeletePostIcon /> : null } 
         { isRequestDone ? <ConfirmationMessage message = { data } /> : null }
         { isRequestBad ? <ErrorMessage error = { errorMessage } /> : null}
     </>

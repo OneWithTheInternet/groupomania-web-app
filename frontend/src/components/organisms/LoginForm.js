@@ -1,6 +1,7 @@
 
 import { useState } from "react";
-import { Navigate } from 'react-router-dom';
+import Redirect from "../atoms/Redirect";
+import { Navigate } from "react-router-dom";
 import makeRequest from "../../api";
 import SubmitButton from "../atoms/SubmitButton";
 import ErrorMessage from "../atoms/ErrorMessage";
@@ -20,10 +21,8 @@ function LoginForm() {
     const [errorMessage, setErrorMessage] = useState('');
     //Stete to check for login 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
     /**
-     * Function handles what happens when user submits form
-     * @param {logs information about the user triggered event} event 
+     * Logs user in
      */
      async function login(event) {
         //Prevent page from reloading when clicking submit
@@ -90,7 +89,7 @@ function LoginForm() {
 
             { errorMessage === '' ? null : <ErrorMessage error= {errorMessage}/> } 
             
-            { isLoggedIn === true ? <Navigate to='/' replace/> : null }
+            { isLoggedIn === true ? <Redirect path={'/feed'} time={0} /> : null }
 
         </form>
     )

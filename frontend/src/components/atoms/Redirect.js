@@ -8,19 +8,22 @@ function Redirect(props) {
   
   setTimeout(() => {
     setRedirectNow(true)
-  }, 1000);
+  }, props.time ? props.time : 1500);
 
   /**
    * Component to be rendered
    */
   let redirectComponent = () => {
-    return (<div>
-    <Navigate to={props.path} />
-  </div>)}
+    return (
+      <div>
+        <Navigate to={props.path} />
+      </div>
+    )
+  }
 
   return (
     <>
-      {redirectNow? redirectComponent() : null }
+      {redirectNow ? redirectComponent() : null }
     </>
   )
 }

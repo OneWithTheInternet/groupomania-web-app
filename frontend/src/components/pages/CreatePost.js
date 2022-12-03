@@ -3,6 +3,7 @@ import TextArea from "../atoms/TextArea";
 import {useState} from 'react';
 import ErrorMessage from '../atoms/ErrorMessage';
 import ConfirmationMessage from "../atoms/ConfirmationMessage";
+import Redirect from "../atoms/Redirect";
 
 function CreatePost() {
     //error state
@@ -13,28 +14,28 @@ function CreatePost() {
     //State to store response from API request 
     const [data, setData] = useState('');
     //Using useState to store user's input in variables
-    const [image, setImage] = useState(null);
-    const [image_altText, setImage_altText] = useState(null);
-    const [bodyText, setBodyText] = useState(null);
-    const userInput = {
-        post: {
-            image: image,
-            image_altText: image_altText,
-            bodyText: bodyText
-        }
-    }
+    const [image, setImage] = useState("");
+    const [image_altText, setImage_altText] = useState("");
+    const [bodyText, setBodyText] = useState("");
+    //Creating data object to be sent with request
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("post", JSON.stringify({image_altText: image_altText, bodyText: bodyText}))
+
     /**
      * creates a post in database by making request to back-end
      */
     async function createPost() {
         try {
-            const responseData = await makeRequest.posts.createPost(userInput);
-
+            //making request
+            const responseData = await makeRequest.posts.createPost(formData);
+            //handling response
             if(!responseData[0].error) {
                 setData(responseData[0].message);
                 setErrorMessage('');
                 setIsRequestDone(true);
                 setIsRequestBad(false);
+             //handling errors
             } else {
                 setErrorMessage(responseData[0].error);
                 setData('');
@@ -48,30 +49,32 @@ function CreatePost() {
         }
     }
     /**
-     * Handles what happens when user clicks on submit button. Prevents default submit behavior
+     * Handles what happens when user clicks on submit button
      */
-    function handleSubmit() {
-        console.log("submit this");
+    function handleSubmit(event) {
+        event.preventDefault();  
+        createPost()
     }
     return (
     <div className='sectionsContainer'>
         <section className='createPost'>
             <div className='createPost__title'><h1>Create a Post</h1></div>
-            <form className='createPost__form'>
+            <form className='createPost__form' onSubmit={ (event) => { handleSubmit(event) }}>
 
                 <label>
                     Upload an Image
                     <input 
+                        fi={image}
                         type="file" 
-                        name="img" 
                         accept="image/*"
-                        onChange={(event) => { setImage(event.target.value) }} 
+                        onChange={(event) => { setImage(event.target.files[0]) }} 
                     />                   
                 </label>
 
                 <label>
                     Alt text (describe your image)
                     <input 
+                        value={image_altText}
                         type="text" 
                         placeholder='Write here...'
                         onChange={(event) => { setImage_altText(event.target.value) }}
@@ -81,6 +84,8 @@ function CreatePost() {
                 <label>
                     Share your thoughts
                     <TextArea 
+                        value={bodyText}
+                        name={bodyText}
                         placeholder='Write here...'
                         onChange={(event) => { setBodyText(event.target.value) }}
                     />
@@ -89,6 +94,8 @@ function CreatePost() {
                 { isRequestBad ? <ErrorMessage error= {errorMessage}/> : null } 
 
                 { isRequestDone ? <ConfirmationMessage message= {data}/> : null }
+
+                { isRequestDone ? <Redirect path={"/feed"} time={1500} /> : null}
                 
                 <input type="submit"/>
             </form>

@@ -84,8 +84,7 @@ function NewPostsSection() {
       setErrorMessage('')
     }
   }, []);
-
-
+  
 
   //returning JSX components
   return <section className="postsFeed" >

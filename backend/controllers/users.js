@@ -46,8 +46,22 @@ exports.createUser = (request, response, next) => {
                 })
                 
                 //Sending back response
-                .then(() => {
-                    response.status(201).json([{message: 'user created successfully'}])
+                .then((user) => {
+                    /* response.status(201).json([{message: 'user created successfully. Please log in'}]) */
+                    
+                    //Creating a token
+                    const token = jwt.sign(
+                        {user_id: user.user_id},
+                        process.env.JSONWEBTOKEN_KEY,
+                        {expiresIn: '24h'}
+                    );
+                    
+                    //Sending response
+                    response.status(200).json([{
+                        user_id: user.user_id,
+                        userName: user.userName,
+                        token: token
+                    }])
                 })
 
                 //catching databse request errors

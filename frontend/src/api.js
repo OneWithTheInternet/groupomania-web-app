@@ -84,13 +84,15 @@ const makeRequest = {
             }
         },
 
-        createPost: async (userInput) => {
+        createPost: async (formData) => {
             try {
                 const requestResponse = await fetch(apiUrl + '/posts', { 
                     method: 'POST',
                     mode: 'cors',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(userInput)
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    },
+                    body: formData
                 });
 
                 //Returning data in JSON format if request is successful
