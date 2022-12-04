@@ -5,11 +5,13 @@ import UserTag from './UserTag';
 import makeRequest from '../../api';
 import ErrorMessage from '../atoms/ErrorMessage';
 import ConfirmationMessage from '../atoms/ConfirmationMessage';
+import Loading from '../atoms/Loading';
 
 function LeaveComment(props) {
   //error state
   const [errorMessage, setErrorMessage] = useState('');
   //request state
+  const [isLoading, setIsLoading] = useState(false);
   const [isRequestDone, setIsRequestDone] = useState(false);
   const [isRequestBad, setIsRequestBad] = useState(false);
   //Creating state variables to store response from API request 
@@ -27,6 +29,7 @@ function LeaveComment(props) {
    async function createComment(event) {
     //Prevent page from reloading when clicking submit
     event.preventDefault()
+    setIsLoading(true);
     try {
       //making api request
       const responseData = await makeRequest.comments.createComment(userInput, props.post_id);
@@ -36,9 +39,7 @@ function LeaveComment(props) {
         setErrorMessage('');
         setIsRequestDone(true);
         setIsRequestBad(false);
-        setTimeout(function(){
-          window.location.reload();
-       }, 500);
+        props.setUpdateNow(true);
         //Handling errors
       } else {
         if(responseData[0].error) {
@@ -51,8 +52,9 @@ function LeaveComment(props) {
     } catch (error) {
       console.log(error);
       setErrorMessage(error.error);
-      return setIsRequestBad(true);
+      setIsRequestBad(true);
     }
+    setIsLoading(false);
   }
   
   return (
@@ -72,6 +74,7 @@ function LeaveComment(props) {
 
         { isRequestBad ? <ErrorMessage error={errorMessage} /> : null }
         { isRequestDone ? <ConfirmationMessage message={data}/> : null }
+        { isLoading ? <Loading /> : null }
     
         <SubmitButton />
     

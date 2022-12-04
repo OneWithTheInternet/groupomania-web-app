@@ -19,7 +19,7 @@ function UserTag(props) {
         }
 
         {props.forResource == "comment" ? 
-            <DeleteIconComment user_id = { props.user_id } comment_id = { props.comment_id } />
+            <DeleteIconComment user_id = { props.user_id } comment_id = { props.comment_id } setRemovedItems={props.setRemovedItems} />
             : null
         }
         

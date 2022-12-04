@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import makeRequest from "../../api";
 import ConfirmationMessage from "./ConfirmationMessage";
 import ErrorMessage from "./ErrorMessage";
+import Loading from "./Loading";
 
 function DeleteIconPost(props) {
     //Error states
+    const [isLoading, setIsLoading] = useState(false);
     const [isRequestBad, setIsRequestBad] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     //Request response's data state
@@ -18,6 +20,7 @@ function DeleteIconPost(props) {
      * Deletes post from database by calling a request
      */
     async function deletePost() {
+        setIsLoading(true);
         try {
             const responseData = await makeRequest.posts.deletePost(props.post_id);
             if (!responseData[0].error) {
@@ -35,8 +38,9 @@ function DeleteIconPost(props) {
             }
         } catch (error) {
             setErrorMessage(error.error);
-            return setIsRequestBad(true)
+            setIsRequestBad(true)
         }
+        setIsLoading(false);
     }
     /**
      * Checks if post belongs to the user trying to delete it and updates stetes accordingly
@@ -52,8 +56,6 @@ function DeleteIconPost(props) {
         }
 
     }, [props.user_id])
-
-
     
     // Icon component
     const DeletePostIcon = () => <div className="userTag_deleteIconContainer" onClick={ () => { deletePost() } }>
@@ -62,6 +64,7 @@ function DeleteIconPost(props) {
 
     return <> 
         { postBelongsToUser ? <DeletePostIcon /> : null } 
+        { isLoading ? <Loading /> : null }
         { isRequestDone ? <ConfirmationMessage message = { data } /> : null }
         { isRequestBad ? <ErrorMessage error = { errorMessage } /> : null}
     </>

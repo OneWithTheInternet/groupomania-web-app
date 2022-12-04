@@ -13,8 +13,8 @@ function RedirectLoggedOut(props) {
   return (
     <div>
         {!localStorage.token ? <Navigate to="/login" /> : null}
-        {props.error == 'invalid Token' ? clearLocalStorage() : null}
-        {props.error == 'invalid Token' ? <Navigate to="/login" /> : null}
+        {props.error === 'invalid Token' ? clearLocalStorage() : null}
+        {props.error === 'invalid Token' ? <Navigate to="/login" /> : null}
     </div>
   )
 }

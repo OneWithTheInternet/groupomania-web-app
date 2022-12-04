@@ -6,17 +6,19 @@ import {Link} from 'react-router-dom';
 import CreationDate from "../atoms/CreationDate";
 import { useState } from "react";
 import { dataWitouthRemovedItems } from "../../functions";
+import ConfirmationMessage from "../atoms/ConfirmationMessage";
 
 function PostCard(props) {
     //Items removed from db by deletion
     const [removedItems, setRemovedItems] = useState([]);
     //Data to loop over
-    let newData = dataWitouthRemovedItems(props.data, removedItems);
+    let newData = dataWitouthRemovedItems(props.data, removedItems, "post");
     //Creating each post from data
     let cards = newData.map((post) => {
         //addding an article DOM element with envent handler
         //issue: posts index updates everytime you delete it so it can't find the deleted  post sometimes
-        if (post.post_id == removedItems) {
+        if (post.deleted) {
+            return (<ConfirmationMessage key={ post.post_id } message={"Post deleted successfully"} />)
          } else {
             return (
                 <article className="postCard" key={ post.post_id }>

@@ -89,7 +89,7 @@ exports.deleteComment = (request, response, next) => {
             //Deleting comment in database
             comment.destroy()
             .then (() => {
-                response.status(200).json([{ message: "comment deleted sucessfully" }])
+                response.status(200).json([{ message: "comment deleted successfully" }])
             })
 
             .catch ((error) => {

@@ -207,7 +207,7 @@ exports.deletePost = (request, response, next) => {
             //Deleting post in database
             post.destroy()
             .then (() => {
-                response.status(200).json([{message: "post deleted sucessfully"}])
+                response.status(200).json([{message: "post deleted successfully"}])
             })
 
             .catch ((error) => {

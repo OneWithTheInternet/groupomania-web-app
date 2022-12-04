@@ -1,17 +1,18 @@
 import { React, useEffect, useState } from 'react';
 import PostText from '../atoms/PostText';
 import UserTag from '../molecules/UserTag';
-import Comment from '../organisms/Comment';
-import LeaveComment from '../molecules/LeaveComment';
-import CommentsCounter from '../molecules/CommentsCounter.js';
 import makeRequest from '../../api';
 import ErrorMessage from '../atoms/ErrorMessage';
 import CreationDate from '../atoms/CreationDate';
+import CommentsSection from '../organisms/CommentsSection';
+import Redirect from "../atoms/Redirect";
+import { faL } from '@fortawesome/free-solid-svg-icons';
 /**
  * Creates a react coponent instance
  * @returns React component instance
  */
 function Post() {
+  
   //State for request respnse data
   const [data, setData] = useState([]);
   //States for confirmation message
@@ -19,6 +20,8 @@ function Post() {
   //States for error handling
   const [errorMessage, setErrorMessage] = useState("");
   const [isRequestBad, setIsRequestBad] = useState(false);  
+  //Delted item state
+  const [removedItems, setRemovedItems] = useState([]);
   /**
    * Requests data to back-end using "makeRequest" function.
    * Updates states to data recieved from the request so they can
@@ -55,8 +58,19 @@ function Post() {
       setIsRequestDone(false);
       setErrorMessage("");
       setIsRequestBad(false);
+      setUpdateNow(false)
     }
   }, []);
+
+  //Activates re-render on action(add comment)
+  const [updateNow, setUpdateNow] = useState(false);
+  useEffect(() => {
+    displayPost()  
+    return () => {
+      setUpdateNow(false)
+    }
+  }, [updateNow])
+  
   //Main JSX componenent to be rendered after request has been received
   let SectionsContainer = () => <div className='sectionsContainer'>
 
@@ -64,7 +78,7 @@ function Post() {
 
     <section className='postContent' >
 
-      <UserTag post_id={data.post_id} user_id={data.user_id} userName={data.user.userName} forResource={"post"}/>
+      <UserTag post_id={data.post_id} user_id={data.user_id} userName={data.user.userName} forResource={"post"} setRemovedItems={setRemovedItems} />
 
       <CreationDate createdAt={ data.createdAt } />
 
@@ -73,26 +87,14 @@ function Post() {
 
     </section>
 
-    <section className='comments'>
+    <CommentsSection data={data} setUpdateNow={setUpdateNow} />
 
-      <CommentsCounter comments={data.comments} />
-
-      <hr></hr>
-
-      <Comment comments={data.comments}/>
-
-    </section>
-
-    <section className='leaveCommentsSection'>
-
-      <LeaveComment post_id={data.post_id} />
-
-    </section>
   </div> 
 
   return (<>
     {isRequestDone ? <SectionsContainer /> : null}
     {isRequestBad ? <ErrorMessage error={errorMessage} /> : null}
+    {removedItems.length > 0 ? <Redirect path={"/feed"} time={0} /> : null }
   </>)
 }
 

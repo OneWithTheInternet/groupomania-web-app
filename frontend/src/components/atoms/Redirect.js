@@ -8,7 +8,7 @@ function Redirect(props) {
   
   setTimeout(() => {
     setRedirectNow(true)
-  }, props.time ? props.time : 1500);
+  }, props.time ? props.time : 0);
 
   /**
    * Component to be rendered

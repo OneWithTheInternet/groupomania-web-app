@@ -209,7 +209,7 @@ exports.deleteUser = (request, response, next) => {
                 //Deleting user in database
                 user.destroy()
                 .then (() => {
-                    response.status(200).json([{message: "user " + user.userName + " deleted sucessfully"}])
+                    response.status(200).json([{message: "user " + user.userName + " deleted successfully"}])
                 })
                 
                 .catch ((error) => {

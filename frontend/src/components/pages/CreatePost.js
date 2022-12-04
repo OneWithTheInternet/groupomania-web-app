@@ -4,6 +4,7 @@ import {useState} from 'react';
 import ErrorMessage from '../atoms/ErrorMessage';
 import ConfirmationMessage from "../atoms/ConfirmationMessage";
 import Redirect from "../atoms/Redirect";
+import SubmitButton from "../atoms/SubmitButton";
 
 function CreatePost() {
     //error state
@@ -97,7 +98,7 @@ function CreatePost() {
 
                 { isRequestDone ? <Redirect path={"/feed"} time={1500} /> : null}
                 
-                <input type="submit"/>
+                <SubmitButton />
             </form>
         </section>
     </div>
