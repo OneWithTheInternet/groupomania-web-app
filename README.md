@@ -2,15 +2,11 @@ A simple social media web application with CRUD functionalithy for ficticious cl
 
 This is a full-stack project with me doing both front and back end.
 
-Frontend developed with React.js and Sass.
-
-Backend's RESTful API developed with Express.
-
-MySql database.
+Technologies: React.js, Sass, Node.js, Express, MySQL.
 
 This is my final project for web dev school.
 
-### Run the project locally
+### Instrunction to run project locally
 ## Setting up Environment
 1. Clone this repo locally
 2. Navigate to /backend folder on the command line
@@ -22,14 +18,14 @@ This is my final project for web dev school.
 7. Go to the backend/models folder
 8. Open models one of the files in that folder
 9. Uncomment the MySQL syncronization block of code close to the end of the file and save it.
-10. On the command line, from the backend folder run command "server start".
+10. On the command line, from the backend folder run command "npm start".
 11. This will start your backend API and sync the model. You can now kill the server program.
 12. Re-comment the block of code in the model file and save it again to prevent it from syncing everytime.
 13. Repeat process for every model in the models folder.
 ## Setting up JWT
 14. Go the the backend/.env file again and add a variable JSONWEBTOKEN_KEY={Your random string here}.
 ## Starting backend App
-15. Run the backend API if not yet running (on the command line navigate to /backend and run "server start").
+15. Run the backend API if not yet running (on the command line navigate to /backend and run "npm start").
 ## Setting up frontend
 16. On a new command line window navigate to /frontend directory and run "npm install".
 ## Starting frontend

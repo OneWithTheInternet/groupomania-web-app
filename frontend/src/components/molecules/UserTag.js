@@ -14,12 +14,21 @@ function UserTag(props) {
         </div>
 
         {props.forResource == "post" ? 
-            <DeleteIconPost user_id = { props.user_id } post_id = { props.post_id } setRemovedItems={props.setRemovedItems}/>
+            <DeleteIconPost 
+                user_id = { props.user_id } 
+                post_id = { props.post_id } 
+                setRemovedItems={props.setRemovedItems}
+            />
             : null
         }
 
         {props.forResource == "comment" ? 
-            <DeleteIconComment user_id = { props.user_id } comment_id = { props.comment_id } setRemovedItems={props.setRemovedItems} />
+            <DeleteIconComment 
+                user_id = { props.user_id } 
+                comment_id = { props.comment_id } 
+                setRemovedItems={props.setRemovedItems} 
+                setUpdateNow={props.setUpdateNow}
+            />
             : null
         }
         

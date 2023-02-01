@@ -30,7 +30,9 @@ function DeleteIconComment(props) {
                 setIsRequestDone(true);
                 setIsRequestBad(false);
                 //Adding removed post's ID to the parent element state
-                props.setRemovedItems(removedItems => [...removedItems, props.comment_id])
+                props.setRemovedItems(removedItems => [...removedItems, props.comment_id]);
+                //Updationg parent componets (to re-render comment counter on comment deletion)
+                props.setUpdateNow(true);
             } else {
                 setData(responseData[0].error);
                 setErrorMessage(responseData[0].error);

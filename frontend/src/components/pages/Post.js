@@ -22,6 +22,9 @@ function Post() {
   const [isRequestBad, setIsRequestBad] = useState(false);  
   //Delted item state
   const [removedItems, setRemovedItems] = useState([]);
+  //Update aid state
+  const [updateNow, setUpdateNow] = useState(false);
+
   /**
    * Requests data to back-end using "makeRequest" function.
    * Updates states to data recieved from the request so they can
@@ -62,8 +65,7 @@ function Post() {
     }
   }, []);
 
-  //Activates re-render on action(add comment)
-  const [updateNow, setUpdateNow] = useState(false);
+  //Activates re-render on action(add/delete comment)
   useEffect(() => {
     displayPost()  
     return () => {

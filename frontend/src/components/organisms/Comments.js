@@ -25,7 +25,8 @@ function Comments(props) {
           user_id={comment.user_id} 
           userName={comment.user.userName} 
           forResource={"comment"} 
-          setRemovedItems={setRemovedItems} 
+          setRemovedItems={setRemovedItems}
+          setUpdateNow={props.setUpdateNow}
         />
   
         <CreationDate createdAt={ comment.createdAt } />

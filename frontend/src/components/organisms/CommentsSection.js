@@ -13,7 +13,7 @@ function CommentsSection(props) {
 
         <hr></hr>
 
-        <Comments comments={props.data.comments} />
+        <Comments comments={props.data.comments} setUpdateNow={props.setUpdateNow}/>
 
         <hr></hr>
 
