@@ -7,7 +7,7 @@ Technologies: React.js, Sass, Node.js, Express, MySQL.
 This is my final project for web dev school.
 
 ## Instrunctions to run project locally
-### Setting up Environment
+### Setting up environment
 1. Clone this repo locally
 2. Navigate to /backend folder on the command line
 3. Run command "npm install" (don't include quotation marks)
@@ -24,7 +24,7 @@ This is my final project for web dev school.
 13. Repeat process for every model in the models folder.
 ### Setting up JWT
 14. Go the the backend/.env file again and add a variable JSONWEBTOKEN_KEY={Your random string here}.
-### Starting backend App
+### Starting backend server
 15. Run the backend API if not yet running (on the command line navigate to /backend and run "npm start").
 ### Setting up frontend
 16. On a new command line window navigate to /frontend directory and run "npm install".
