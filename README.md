@@ -6,7 +6,7 @@ Technologies: React.js, Sass, Node.js, Express, MySQL.
 
 This is my final project for web dev school.
 
-## Instrunction to run project locally
+## Instrunctions to run project locally
 ### Setting up Environment
 1. Clone this repo locally
 2. Navigate to /backend folder on the command line
