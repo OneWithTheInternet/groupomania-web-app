@@ -20,7 +20,7 @@ This is my final project for web dev school.
 9. Uncomment the MySQL syncronization block of code close to the end of the file and save it.
 10. On the command line, from the backend folder run command "npm start".
 11. This will start your backend API and sync the model. You can now kill the server program.
-12. Re-comment the block of code in the model file and save it again to prevent it from syncing everytime.
+12. Re-comment the synchronization block of code in the model file and save it again to prevent it from syncing everytime.
 13. Repeat process for every model in the models folder.
 ### Setting up JWT
 14. Go the the backend/.env file again and add a variable JSONWEBTOKEN_KEY={Your random string here}.
