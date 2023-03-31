@@ -1,3 +1,5 @@
+Video demo at https://youtu.be/xBUPaStY9nw.
+
 A simple social media web application with CRUD functionalithy for ficticious client Groupomania.
 
 This is a full-stack project with me doing both front and back end.
